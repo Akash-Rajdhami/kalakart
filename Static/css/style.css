@@ -1,0 +1,84 @@
+/* for lighttheme */
+
+:root{
+
+    --bg-color: #F8F5F0;
+    --navbar-color: #FFFFFF;
+    --text-color: #222222;
+    --main-color: #F97316;
+}
+
+
+/* for darktheme */
+
+.dark-theme{
+
+    --bg-color: #0F172A;
+    --navbar-color: #111827;
+    --text-color: #F9FAFB;
+    --main-color: #F97316;
+}
+
+
+
+
+
+body{
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+
+
+.navbar{
+
+    background-color: var(--navbar-color);
+    padding: 15px 0;
+}
+
+
+
+.nav-link{
+
+    color: var(--text-color) !important;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.nav-link:hover{
+
+    color: var(--main-color) !important;
+}
+
+
+
+.btn-search{
+
+    background-color: var(--main-color);
+    color: white;
+}
+
+
+
+.btn-login{
+
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+
+.btn-register{
+
+    background-color: var(--main-color);
+    color: white;
+}
+
+
+
+.btn-theme{
+
+    background-color: var(--main-color);
+    color: white;
+}
