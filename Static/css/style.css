@@ -1,10 +1,10 @@
 
 :root{
 
-    --bg-color: #F8F5F0;
+    --bg-color: #FFFFFF;
     --navbar-color: #FFFFFF;
-    --text-color: #222222;
-    --main-color: #F97316;
+    --text-color: #111111;
+    --main-color: #FB923C;
 }
 
 
@@ -28,7 +28,7 @@ body{
 .nav-link{
 
     color: var(--text-color) !important;
-    margin-right: 15px;
+    margin-right: 20px;
     font-weight: 500;
 }
 
@@ -73,4 +73,9 @@ body{
     font-size: 24px;
     font-weight: 700;
     color: var(--text-color);
+}
+
+.navbar-brand{
+
+    width: 220px;
 }
