@@ -69,3 +69,76 @@ body {
   justify-content: center;
 }
 
+
+.hero-section {
+  padding: 60px 0;
+}
+
+.hero-title {
+  font-size: 58px;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.hero-slogan {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-shop,
+.btn-learn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+
+.btn-shop {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.btn-shop:hover {
+  background-color: #e67e22;
+  color: white;
+}
+
+
+.btn-learn {
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
+}
+
+.btn-learn:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+
+
+.hero-image {
+  width: 100%;
+  max-width: 620px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
