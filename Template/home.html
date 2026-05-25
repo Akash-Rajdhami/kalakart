@@ -1,8 +1,61 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<h1>Welcome to KalaKart</h1>
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- Left Side -->
+
+            <div class="col-lg-6">
+
+                <h1 class="hero-title">
+                    KalaKart
+                </h1>
+
+                <h4 class="hero-slogan">
+                    Crafted with Culture
+                </h4>
+
+                <p class="hero-description">
+                    Discover unique handmade and cultural products created by talented artists. Explore authentic craftsmanship and bring meaningful creations into your home.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="/shop/" class="btn-shop">
+                        Shop Now
+                    </a>
+
+                    <a href="/about/" class="btn-learn">
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="{% static 'images/hero.png' %}"
+                    alt="KalaKart Products"
+                    class="img-fluid hero-image"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}
-

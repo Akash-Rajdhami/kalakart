@@ -1,84 +1,71 @@
-:root{
-
-    --bg-color: #FFFFFF;
-    --navbar-color: #FFFFFF;
-    --text-color: #111111;
-    --main-color: #FB923C;
+:root {
+  --bg-color: #ffffff;
+  --navbar-color: #ffffff;
+  --text-color: #111111;
+  --main-color: #fb923c;
 }
 
-body{
-
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: 0.3s;
+body {
+  background-color: yellow !important;
+  /* background-color: var(--bg-color); */
+  color: var(--text-color);
+  transition: 0.3s;
 }
 
-.navbar{
-
-    background-color: var(--navbar-color);
-    padding: 15px 0;
+.navbar {
+  background-color: var(--navbar-color);
+  padding: 15px 0;
 }
 
-.nav-link{
-
-    color: var(--text-color) !important;
-    margin-right: 20px;
-    font-weight: 500;
+.nav-link {
+  color: var(--text-color) !important;
+  margin-right: 20px;
+  font-weight: 500;
 }
 
-.nav-link:hover{
-
-    color: var(--main-color) !important;
+.nav-link:hover {
+  color: var(--main-color) !important;
 }
 
-.btn-search{
-
-    background-color: var(--main-color);
-    color: white;
+.btn-search {
+  background-color: var(--main-color);
+  color: white;
 }
 
-.btn-login{
-
-    border: 1px solid var(--main-color);
-    color: var(--main-color);
+.btn-login {
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
 }
 
-.btn-register{
-
-    background-color: var(--main-color);
-    color: white;
+.btn-register {
+  background-color: var(--main-color);
+  color: white;
 }
 
-.logo-text{
-
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-color);
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-.navbar-brand{
-
-    width: 280px;
+.navbar-brand {
+  width: 280px;
 }
 
-.navbar form{
-
-    margin-bottom: 0;
+.navbar form {
+  margin-bottom: 0;
 }
 
-.form-control{
-
-    height: 40px;
+.form-control {
+  height: 40px;
 }
 
 .btn-search,
 .btn-login,
-.btn-register{
-
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-register {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
