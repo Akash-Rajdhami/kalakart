@@ -36,7 +36,6 @@
   </div>
 </section>
 
-
 {% comment %} Featured-Categories {% endcomment %}
 
 <section class="categories-section">
@@ -136,42 +135,128 @@
 </section>
 
 
+{% comment %} why section {% endcomment %}
+
 <section class="why-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Why Choose KalaKart</h2>
+
+      <p class="section-subtitle">
+        Experience authentic handmade products while supporting local artists
+        and culture.
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 mb-4">
+        <div class="why-card">
+          <div class="why-icon">
+            <i class="bi bi-palette"></i>
+          </div>
+
+          <h4>Handmade Products</h4>
+
+          <p>
+            Discover carefully crafted handmade items created with creativity
+            and passion.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="why-card">
+          <div class="why-icon">
+            <i class="bi bi-people"></i>
+          </div>
+
+          <h4>Support Local Artists</h4>
+
+          <p>
+            Every purchase helps talented local creators grow and share their
+            craftsmanship.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="why-card">
+          <div class="why-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+
+          <h4>Secure Shopping</h4>
+
+          <p>
+            Enjoy a smooth and secure shopping experience with trusted payment
+            methods.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="why-card">
+          <div class="why-icon">
+            <i class="bi bi-credit-card"></i>
+          </div>
+
+          <h4>Flexible Payment</h4>
+
+          <p>
+            Pay easily using Khalti or Cash on Delivery according to your
+            preference.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} Featured Products {% endcomment %}
+
+<section class="products-section">
 
     <div class="container">
-
 
         <div class="text-center mb-5">
 
             <h2 class="section-title">
-                Why Choose KalaKart
+                Featured Products
             </h2>
 
             <p class="section-subtitle">
-                Experience authentic handmade products while supporting local artists and culture.
+                Explore some of our popular handmade and cultural products.
             </p>
 
         </div>
-
 
         <div class="row">
 
 
             <div class="col-md-3 mb-4">
 
-                <div class="why-card">
+                <div class="product-card">
 
-                    <div class="why-icon">
-                        🎨
+                    <img
+                        src="{% static 'images/product1.jpg' %}"
+                        class="product-image"
+                    >
+
+                    <div class="product-content">
+
+                        <h4>
+                            Handmade Clay Vase
+                        </h4>
+
+                        <p class="product-price">
+                            Rs. 2500
+                        </p>
+
+                        <a href="/shop/" class="btn-product">
+                            View Product
+                        </a>
+
                     </div>
-
-                    <h4>
-                        Handmade Products
-                    </h4>
-
-                    <p>
-                        Discover carefully crafted handmade items created with creativity and passion.
-                    </p>
 
                 </div>
 
@@ -180,19 +265,28 @@
 
             <div class="col-md-3 mb-4">
 
-                <div class="why-card">
+                <div class="product-card">
 
-                    <div class="why-icon">
-                        🤝
+                    <img
+                        src="{% static 'images/product2.jpg' %}"
+                        class="product-image"
+                    >
+
+                    <div class="product-content">
+
+                        <h4>
+                            Mithila Painting
+                        </h4>
+
+                        <p class="product-price">
+                            Rs. 4500
+                        </p>
+
+                        <a href="/shop/" class="btn-product">
+                            View Product
+                        </a>
+
                     </div>
-
-                    <h4>
-                        Support Local Artists
-                    </h4>
-
-                    <p>
-                        Every purchase helps talented local creators grow and share their craftsmanship.
-                    </p>
 
                 </div>
 
@@ -201,19 +295,28 @@
 
             <div class="col-md-3 mb-4">
 
-                <div class="why-card">
+                <div class="product-card">
 
-                    <div class="why-icon">
-                        🔒
+                    <img
+                        src="{% static 'images/product3.jpg' %}"
+                        class="product-image"
+                    >
+
+                    <div class="product-content">
+
+                        <h4>
+                            Wooden Buddha Statue
+                        </h4>
+
+                        <p class="product-price">
+                            Rs. 3800
+                        </p>
+
+                        <a href="/shop/" class="btn-product">
+                            View Product
+                        </a>
+
                     </div>
-
-                    <h4>
-                        Secure Shopping
-                    </h4>
-
-                    <p>
-                        Enjoy a smooth and secure shopping experience with trusted payment methods.
-                    </p>
 
                 </div>
 
@@ -222,19 +325,28 @@
 
             <div class="col-md-3 mb-4">
 
-                <div class="why-card">
+                <div class="product-card">
 
-                    <div class="why-icon">
-                        💳
+                    <img
+                        src="{% static 'images/product4.jpg' %}"
+                        class="product-image"
+                    >
+
+                    <div class="product-content">
+
+                        <h4>
+                            Traditional Necklace
+                        </h4>
+
+                        <p class="product-price">
+                            Rs. 1800
+                        </p>
+
+                        <a href="/shop/" class="btn-product">
+                            View Product
+                        </a>
+
                     </div>
-
-                    <h4>
-                        Flexible Payment
-                    </h4>
-
-                    <p>
-                        Pay easily using Khalti or Cash on Delivery according to your preference.
-                    </p>
 
                 </div>
 
@@ -246,5 +358,4 @@
 
 </section>
 
-{% endblock %} 
-
+{% endblock %}
