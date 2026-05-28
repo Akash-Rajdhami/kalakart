@@ -363,3 +363,57 @@ body {
 
     color: white;
 }
+
+
+.footer-section {
+  background-color: #222;
+  color: white;
+  padding: 70px 0 20px;
+  margin-top: 80px;
+}
+
+.footer-logo {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.footer-heading {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.footer-text {
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.footer-bottom p {
+  margin-bottom: 0;
+  color: #aaa;
+}
