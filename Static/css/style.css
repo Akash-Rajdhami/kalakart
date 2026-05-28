@@ -12,10 +12,10 @@ body {
   transition: 0.3s;
 }
 
-p{
+/* p{
 
     text-align: justify;
-}
+} */
 
 .navbar {
   background-color: var(--navbar-color);
@@ -363,3 +363,4 @@ p{
 
     color: white;
 }
+

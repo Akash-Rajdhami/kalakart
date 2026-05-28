@@ -134,7 +134,6 @@
   </div>
 </section>
 
-
 {% comment %} why section {% endcomment %}
 
 <section class="why-section">
@@ -215,147 +214,90 @@
 {% comment %} Featured Products {% endcomment %}
 
 <section class="products-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Featured Products</h2>
 
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <h2 class="section-title">
-                Featured Products
-            </h2>
-
-            <p class="section-subtitle">
-                Explore some of our popular handmade and cultural products.
-            </p>
-
-        </div>
-
-        <div class="row">
-
-
-            <div class="col-md-3 mb-4">
-
-                <div class="product-card">
-
-                    <img
-                        src="{% static 'images/product1.jpg' %}"
-                        class="product-image"
-                    >
-
-                    <div class="product-content">
-
-                        <h4>
-                            Handmade Clay Vase
-                        </h4>
-
-                        <p class="product-price">
-                            Rs. 2500
-                        </p>
-
-                        <a href="/shop/" class="btn-product">
-                            View Product
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-3 mb-4">
-
-                <div class="product-card">
-
-                    <img
-                        src="{% static 'images/product2.jpg' %}"
-                        class="product-image"
-                    >
-
-                    <div class="product-content">
-
-                        <h4>
-                            Mithila Painting
-                        </h4>
-
-                        <p class="product-price">
-                            Rs. 4500
-                        </p>
-
-                        <a href="/shop/" class="btn-product">
-                            View Product
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-3 mb-4">
-
-                <div class="product-card">
-
-                    <img
-                        src="{% static 'images/product3.jpg' %}"
-                        class="product-image"
-                    >
-
-                    <div class="product-content">
-
-                        <h4>
-                            Wooden Buddha Statue
-                        </h4>
-
-                        <p class="product-price">
-                            Rs. 3800
-                        </p>
-
-                        <a href="/shop/" class="btn-product">
-                            View Product
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-3 mb-4">
-
-                <div class="product-card">
-
-                    <img
-                        src="{% static 'images/product4.jpg' %}"
-                        class="product-image"
-                    >
-
-                    <div class="product-content">
-
-                        <h4>
-                            Traditional Necklace
-                        </h4>
-
-                        <p class="product-price">
-                            Rs. 1800
-                        </p>
-
-                        <a href="/shop/" class="btn-product">
-                            View Product
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+      <p class="section-subtitle">
+        Explore some of our popular handmade and cultural products.
+      </p>
     </div>
 
+    <div class="row">
+      <div class="col-md-3 mb-4">
+        <div class="product-card">
+          <img src="{% static 'images/product1.jpg' %}" class="product-image" />
+
+          <div class="product-content">
+            <h4>Handmade Clay Vase</h4>
+
+            <p class="product-price">Rs. 2500</p>
+
+            <a href="/shop/" class="btn-product"> View Product </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="product-card">
+          <img src="{% static 'images/product2.jpg' %}" class="product-image" />
+
+          <div class="product-content">
+            <h4>Mithila Painting</h4>
+
+            <p class="product-price">Rs. 4500</p>
+
+            <a href="/shop/" class="btn-product"> View Product </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="product-card">
+          <img src="{% static 'images/product3.jpg' %}" class="product-image" />
+
+          <div class="product-content">
+            <h4>Wooden Buddha Statue</h4>
+
+            <p class="product-price">Rs. 3800</p>
+
+            <a href="/shop/" class="btn-product"> View Product </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="product-card">
+          <img src="{% static 'images/product4.jpg' %}" class="product-image" />
+
+          <div class="product-content">
+            <h4>Traditional Necklace</h4>
+
+            <p class="product-price">Rs. 1800</p>
+
+            <a href="/shop/" class="btn-product"> View Product </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} Seller CTA Section {% endcomment %}
+
+<section class="seller-section">
+  <div class="container">
+    <div class="seller-box text-center">
+      <h2 class="seller-title">Become a Seller on KalaKart</h2>
+
+      <p class="seller-description">
+        Share your handmade creations with customers across Nepal and grow your
+        artistic business with KalaKart.
+      </p>
+
+      <a href="#" class="seller-btn"> Start Selling </a>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
