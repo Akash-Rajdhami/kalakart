@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<section class="shop-banner">
+
+    <div class="container text-center">
+
+        <h1 class="shop-title">
+            Explore Handmade Products
+        </h1>
+
+        <p class="shop-description">
+            Discover unique handmade and cultural products created by talented artists across Nepal.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<section class="shop-products">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="shop-card">
+
+                    <img
+                        src="{% static 'images/product-placeholder.jpg' %}"
+                        class="shop-image"
+                    >
+
+                    <div class="shop-content">
+
+                        <h4>
+                            Handmade Clay Vase
+                        </h4>
+
+                        <p class="shop-category">
+                            Pottery
+                        </p>
+
+                        <p class="shop-price">
+                            Rs. 2500
+                        </p>
+
+                        <a href="#" class="shop-btn">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="shop-card">
+
+                    <img
+                        src="{% static 'images/product-placeholder.jpg' %}"
+                        class="shop-image"
+                    >
+
+                    <div class="shop-content">
+
+                        <h4>
+                            Mithila Painting
+                        </h4>
+
+                        <p class="shop-category">
+                            Painting
+                        </p>
+
+                        <p class="shop-price">
+                            Rs. 4500
+                        </p>
+
+                        <a href="#" class="shop-btn">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="shop-card">
+
+                    <img
+                        src="{% static 'images/product-placeholder.jpg' %}"
+                        class="shop-image"
+                    >
+
+                    <div class="shop-content">
+
+                        <h4>
+                            Traditional Necklace
+                        </h4>
+
+                        <p class="shop-category">
+                            Jewelry
+                        </p>
+
+                        <p class="shop-price">
+                            Rs. 1800
+                        </p>
+
+                        <a href="#" class="shop-btn">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="shop-card">
+
+                    <img
+                        src="{% static 'images/product-placeholder.jpg' %}"
+                        class="shop-image"
+                    >
+
+                    <div class="shop-content">
+
+                        <h4>
+                            Wooden Buddha Statue
+                        </h4>
+
+                        <p class="shop-category">
+                            Wooden Art
+                        </p>
+
+                        <p class="shop-price">
+                            Rs. 3800
+                        </p>
+
+                        <a href="#" class="shop-btn">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

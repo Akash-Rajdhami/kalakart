@@ -6,7 +6,7 @@ def HomeView(request):
     return render(request,'home.html')
 
 def ShopView(request):
-    pass
+    return render(request,'shop.html')
 
 def AboutView(request):
     return render(request,'about.html')
