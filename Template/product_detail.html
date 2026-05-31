@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="product-detail-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+
+            <div class="col-lg-6 mb-4">
+
+                <img
+                    src="{% static 'images/product-placeholder.jpg' %}"
+                    alt="Product Image"
+                    class="img-fluid product-detail-image"
+                >
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <h2 class="product-title">
+                    Handmade Clay Vase
+                </h2>
+
+                <p class="product-category">
+                    Category: Pottery
+                </p>
+
+                <h3 class="product-price">
+                    Rs. 2500
+                </h3>
+
+                <p class="product-description">
+                    This handmade clay vase is carefully crafted by skilled artists using traditional techniques. It adds a cultural touch to any home and makes a meaningful gift for friends and family.
+                </p>
+
+                <div class="product-features">
+
+                    <p>✓ Handmade by local artists</p>
+
+                    <p>✓ High quality craftsmanship</p>
+
+                    <p>✓ Unique cultural design</p>
+
+                    <p>✓ Suitable for home decoration</p>
+
+                </div>
+
+                <div class="product-buttons">
+
+                    <a href="#" class="btn-cart">
+                        Add to Cart
+                    </a>
+
+                    <a href="/shop/" class="btn-back">
+                        Back to Shop
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
