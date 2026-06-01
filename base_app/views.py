@@ -11,5 +11,8 @@ def ShopView(request):
 def AboutView(request):
     return render(request,'about.html')
 
+def ProductDetailView(request):
+    return render(request, 'product_detail.html')
+
 # def HomeView(request):
 #     pass
