@@ -734,3 +734,96 @@ body {
 
     color: white;
 }
+
+
+.register-section{
+
+    padding: 80px 0;
+
+    background-color: #f8f9fa;
+}
+
+.register-card{
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.register-title{
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    color: var(--text-color);
+
+    margin-bottom: 10px;
+}
+
+.register-subtitle{
+
+    color: #666;
+
+    margin-bottom: 30px;
+}
+
+.form-label{
+
+    font-weight: 600;
+}
+
+.form-control,
+.form-select{
+
+    padding: 12px;
+
+    border-radius: 6px;
+}
+
+.register-btn{
+
+    background-color: var(--main-color);
+
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.register-btn:hover{
+
+    background-color: #e67e22;
+}
+
+.login-link{
+
+    color: #666;
+}
+
+.login-link a{
+
+    color: var(--main-color);
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.login-link a:hover{
+
+    text-decoration: underline;
+}
