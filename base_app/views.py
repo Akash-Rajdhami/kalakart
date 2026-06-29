@@ -14,5 +14,8 @@ def AboutView(request):
 def ProductDetailView(request):
     return render(request, 'product_detail.html')
 
+def RegisterView(request):
+    return render(request, 'register.html')
+
 # def HomeView(request):
 #     pass
