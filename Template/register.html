@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="register-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6 col-md-8">
+
+                <div class="register-card">
+
+                    <h2 class="register-title text-center">
+                        Create Your Account
+                    </h2>
+
+                    <p class="register-subtitle text-center">
+                        Join KalaKart as a Customer or Seller.
+                    </p>
+
+                    <form>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                            >
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                placeholder="Enter your email"
+                            >
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Choose a username"
+                            >
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Create a password"
+                            >
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Confirm your password"
+                            >
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Register As
+                            </label>
+
+                            <select class="form-select">
+
+                                <option selected disabled>
+                                    Select Account Type
+                                </option>
+
+                                <option>
+                                    Customer
+                                </option>
+
+                                <option>
+                                    Seller
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="register-btn w-100"
+                        >
+                            Register
+                        </button>
+
+                    </form>
+
+                    <p class="login-link text-center mt-4">
+
+                        Already have an account?
+
+                        <a href="/login/">
+                            Login
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
