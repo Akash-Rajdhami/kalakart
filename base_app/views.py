@@ -16,6 +16,7 @@ def ProductDetailView(request):
 
 def RegisterView(request):
     return render(request, 'register.html')
+
 def LoginView(request):
     return render(request,'login.html')
 
