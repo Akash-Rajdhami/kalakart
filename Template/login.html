@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="login-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-5 col-md-7">
+
+                <div class="login-card">
+
+                    <h2 class="login-title text-center">
+                        Welcome Back
+                    </h2>
+
+                    <p class="login-subtitle text-center">
+                        Login to your KalaKart account.
+                    </p>
+
+                    <form>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter your username"
+                            >
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                            >
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="login-btn w-100"
+                        >
+                            Login
+                        </button>
+
+                    </form>
+
+                    <p class="register-link text-center mt-4">
+
+                        Don't have an account?
+
+                        <a href="{% url 'register' %}">
+                            Register
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
