@@ -44,11 +44,26 @@
                                 Password
                             </label>
 
-                            <input
-                                type="password"
-                                class="form-control"
-                                placeholder="Enter your password"
-                            >
+                            <div class="input-group">
+
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="loginPassword"
+                                    placeholder="Enter your password"
+                                >
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    onclick="togglePassword('loginPassword', this)"
+                                >
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
 
                         </div>
 
