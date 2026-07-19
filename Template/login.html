@@ -8,7 +8,7 @@
 
     <div class="container">
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
 
             <div class="col-lg-5 col-md-7">
 
@@ -34,36 +34,58 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Enter your username"
+                                required
                             >
 
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-3">
 
                             <label class="form-label">
                                 Password
                             </label>
 
-                            <div class="input-group">
+                            <div class="password-box">
 
                                 <input
                                     type="password"
                                     class="form-control"
                                     id="loginPassword"
                                     placeholder="Enter your password"
+                                    required
                                 >
 
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-secondary"
+                                <i
+                                    class="bi bi-eye password-toggle"
                                     onclick="togglePassword('loginPassword', this)"
-                                >
-
-                                    <i class="bi bi-eye"></i>
-
-                                </button>
+                                ></i>
 
                             </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                            <div class="form-check">
+
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="rememberMe"
+                                >
+
+                                <label
+                                    class="form-check-label"
+                                    for="rememberMe"
+                                >
+                                    Remember Me
+                                </label>
+
+                            </div>
+
+                            <a href="#" class="forgot-password">
+                                Forgot Password?
+                            </a>
 
                         </div>
 
