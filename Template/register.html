@@ -22,7 +22,9 @@
                         Join KalaKart as a Customer or Seller.
                     </p>
 
-                    <form>
+                    <form method="POST">
+
+                        {% csrf_token %}
 
                         <div class="mb-3">
 
@@ -32,6 +34,7 @@
 
                             <input
                                 type="text"
+                                name="first_name"
                                 class="form-control"
                                 placeholder="Enter your full name"
                                 required
@@ -47,6 +50,7 @@
 
                             <input
                                 type="email"
+                                name="email"
                                 class="form-control"
                                 placeholder="Enter your email"
                                 required
@@ -62,6 +66,7 @@
 
                             <input
                                 type="text"
+                                name="username"
                                 class="form-control"
                                 placeholder="Choose a username"
                                 required
@@ -79,8 +84,9 @@
 
                                 <input
                                     type="password"
-                                    class="form-control"
+                                    name="password1"
                                     id="registerPassword"
+                                    class="form-control"
                                     placeholder="Create a password"
                                     required
                                 >
@@ -104,8 +110,9 @@
 
                                 <input
                                     type="password"
-                                    class="form-control"
+                                    name="password2"
                                     id="confirmPassword"
+                                    class="form-control"
                                     placeholder="Confirm your password"
                                     required
                                 >
@@ -125,17 +132,21 @@
                                 Register As
                             </label>
 
-                            <select class="form-select" required>
+                            <select
+                                name="user_type"
+                                class="form-select"
+                                required
+                            >
 
-                                <option selected disabled>
+                                <option value="" selected disabled>
                                     Select Account Type
                                 </option>
 
-                                <option>
+                                <option value="customer">
                                     Customer
                                 </option>
 
-                                <option>
+                                <option value="seller">
                                     Seller
                                 </option>
 
