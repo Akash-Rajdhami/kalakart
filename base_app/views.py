@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from accounts.models import CustomUser
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def HomeView(request):
     return render(request, "home.html")
@@ -97,3 +98,14 @@ def LogoutView(request):
     messages.success(request, "Logged out successfully.")
 
     return redirect("home")
+
+@login_required
+def SellerDashboardView(request):
+
+    if request.user.user_type != "seller":
+
+        messages.error(request, "Only sellers can access this page.")
+
+        return redirect("home")
+
+    return render(request, "seller_dashboard.html")
