@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="container py-5">
+  <h2 class="mb-4">Seller Dashboard</h2>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h4>0</h4>
+
+          <p>Products</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h4>0</h4>
+
+          <p>Orders</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h4>Rs. 0</h4>
+
+          <p>Revenue</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h4>Active</h4>
+
+          <p>Status</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <a href="{% url 'add-product' %}" class="btn btn-warning"> Add Product </a>
+  </div>
+</section>
+
+{% endblock %}
