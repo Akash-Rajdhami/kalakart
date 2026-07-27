@@ -60,3 +60,15 @@ def EditProductView(request, id):
     }
 
     return render(request, "seller/edit_product.html", context)
+
+def DeleteProductView(request, id):
+
+    product = get_object_or_404(
+        Product,
+        id=id,
+        seller=request.user
+    )
+
+    product.delete()
+
+    return redirect("seller-dashboard")
