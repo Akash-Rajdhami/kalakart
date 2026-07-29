@@ -4,6 +4,7 @@ from django.contrib import messages
 from accounts.models import CustomUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from products.models import Product
 
 def HomeView(request):
     return render(request, "home.html")
