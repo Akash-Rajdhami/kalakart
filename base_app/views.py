@@ -11,7 +11,14 @@ def HomeView(request):
 
 
 def ShopView(request):
-    return render(request, "shop.html")
+
+    products = Product.objects.all()
+
+    context = {
+        "products": products
+    }
+
+    return render(request, "shop.html", context)
 
 
 def AboutView(request):
