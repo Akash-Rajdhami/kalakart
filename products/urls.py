@@ -22,12 +22,18 @@ urlpatterns = [
         EditProductView,
         name="edit-product"
     ),
-    
+
     path(
-    "seller/delete-product/<int:id>/",
-    DeleteProductView,
-    name="delete-product"
-),
+        "seller/delete-product/<int:id>/",
+        DeleteProductView,
+        name="delete-product"
+    ),
+
+    path(
+        "product/<int:id>/",
+        ProductDetailView,
+        name="product-detail"
+    ),
 
 ]
 
