@@ -72,3 +72,20 @@ def DeleteProductView(request, id):
     product.delete()
 
     return redirect("seller-dashboard")
+
+def ProductDetailView(request, id):
+
+    product = get_object_or_404(
+        Product,
+        id=id
+    )
+
+    context = {
+        "product": product,
+    }
+
+    return render(
+        request,
+        "product_detail.html",
+        context
+    )
