@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block content %}
 
 <section class="product-detail-section">
@@ -10,45 +8,52 @@
 
         <div class="row align-items-center">
 
-
             <div class="col-lg-6 mb-4">
 
+                {% if product.image %}
+
                 <img
-                    src="{% static 'images/product-placeholder.jpg' %}"
-                    alt="Product Image"
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
                     class="img-fluid product-detail-image"
                 >
 
-            </div>
+                {% else %}
 
+                <img
+                    src="https://via.placeholder.com/600x500"
+                    alt="No Image"
+                    class="img-fluid product-detail-image"
+                >
+
+                {% endif %}
+
+            </div>
 
             <div class="col-lg-6">
 
                 <h2 class="product-title">
-                    Handmade Clay Vase
+                    {{ product.name }}
                 </h2>
 
                 <p class="product-category">
-                    Category: Pottery
+                    <strong>Category:</strong>
+                    {{ product.category }}
                 </p>
 
                 <h3 class="product-price">
-                    Rs. 2500
+                    Rs. {{ product.price }}
                 </h3>
 
                 <p class="product-description">
-                    This handmade clay vase is carefully crafted by skilled artists using traditional techniques. It adds a cultural touch to any home and makes a meaningful gift for friends and family.
+                    {{ product.description }}
                 </p>
 
                 <div class="product-features">
 
-                    <p>✓ Handmade by local artists</p>
+                    <p><strong>Stock:</strong> {{ product.stock }}</p>
 
-                    <p>✓ High quality craftsmanship</p>
-
-                    <p>✓ Unique cultural design</p>
-
-                    <p>✓ Suitable for home decoration</p>
+                    <p><strong>Seller:</strong> {{ product.seller.username }}</p>
 
                 </div>
 
@@ -58,7 +63,7 @@
                         Add to Cart
                     </a>
 
-                    <a href="/shop/" class="btn-back">
+                    <a href="{% url 'shop' %}" class="btn-back">
                         Back to Shop
                     </a>
 
