@@ -9,5 +9,10 @@ urlpatterns = [
         AddToCartView,
         name="add-to-cart"
     ),
+     path(
+        "",
+        CartView,
+        name="cart"
+    ),
 
 ]
