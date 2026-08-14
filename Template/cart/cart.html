@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <h2 class="mb-4">
+        My Cart
+    </h2>
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+        <div class="card mb-3 shadow-sm">
+
+            <div class="card-body">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-2">
+
+                        {% if item.product.image %}
+
+                        <img
+                            src="{{ item.product.image.url }}"
+                            alt="{{ item.product.name }}"
+                            class="img-fluid rounded"
+                        >
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h5>
+                            {{ item.product.name }}
+                        </h5>
+
+                        <p class="mb-1">
+                            Category: {{ item.product.category }}
+                        </p>
+
+                        <p class="mb-0">
+                            Rs. {{ item.product.price }}
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <p class="mb-0">
+                            Quantity: {{ item.quantity }}
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <strong>
+                            Rs.
+                            {% widthratio item.product.price 1 item.quantity %}
+                        </strong>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            disabled
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <div class="text-end mt-4">
+
+            <h4>
+                Total: Rs. {{ total }}
+            </h4>
+
+            <button class="btn btn-success mt-2">
+                Proceed to Checkout
+            </button>
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            Your cart is empty.
+
+        </div>
+
+        <a
+            href="{% url 'shop' %}"
+            class="btn btn-warning"
+        >
+            Continue Shopping
+        </a>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
