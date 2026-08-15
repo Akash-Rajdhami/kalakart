@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from products.models import Product
 from .models import Cart
@@ -10,7 +10,7 @@ def AddToCartView(request, id):
         messages.error(request, "Please login to add products to cart.")
         return redirect("login")
 
-    product = Product.objects.get(id=id)
+    product = get_object_or_404(Product, id=id)
 
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
@@ -54,3 +54,52 @@ def CartView(request):
         "cart/cart.html",
         context
     )
+
+
+def IncreaseQuantityView(request, id):
+
+    cart_item = get_object_or_404(
+        Cart,
+        id=id,
+        user=request.user
+    )
+
+    cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect("cart")
+
+
+def DecreaseQuantityView(request, id):
+
+    cart_item = get_object_or_404(
+        Cart,
+        id=id,
+        user=request.user
+    )
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect("cart")
+
+
+def RemoveFromCartView(request, id):
+
+    cart_item = get_object_or_404(
+        Cart,
+        id=id,
+        user=request.user
+    )
+
+    cart_item.delete()
+
+    messages.success(
+        request,
+        "Product removed from cart."
+    )
+
+    return redirect("cart")
