@@ -18,6 +18,8 @@
 
                 <div class="row align-items-center">
 
+                    <!-- Product Image -->
+
                     <div class="col-md-2">
 
                         {% if item.product.image %}
@@ -32,7 +34,10 @@
 
                     </div>
 
-                    <div class="col-md-4">
+
+                    <!-- Product Information -->
+
+                    <div class="col-md-3">
 
                         <h5>
                             {{ item.product.name }}
@@ -48,31 +53,57 @@
 
                     </div>
 
-                    <div class="col-md-2">
 
-                        <p class="mb-0">
-                            Quantity: {{ item.quantity }}
-                        </p>
+                    <!-- Quantity -->
+
+                    <div class="col-md-3">
+
+                        <div class="d-flex align-items-center">
+
+                            <a
+                                href="{% url 'decrease-quantity' item.id %}"
+                                class="btn btn-outline-secondary btn-sm"
+                            >
+                                −
+                            </a>
+
+                            <span class="mx-3 fw-bold">
+                                {{ item.quantity }}
+                            </span>
+
+                            <a
+                                href="{% url 'increase-quantity' item.id %}"
+                                class="btn btn-outline-secondary btn-sm"
+                            >
+                                +
+                            </a>
+
+                        </div>
 
                     </div>
+
+
+                    <!-- Item Total -->
 
                     <div class="col-md-2">
 
                         <strong>
-                            Rs.
-                            {% widthratio item.product.price 1 item.quantity %}
+                            Rs. {% widthratio item.product.price 1 item.quantity %}
                         </strong>
 
                     </div>
 
+
+                    <!-- Remove -->
+
                     <div class="col-md-2">
 
-                        <button
+                        <a
+                            href="{% url 'remove-from-cart' item.id %}"
                             class="btn btn-danger btn-sm"
-                            disabled
                         >
                             Remove
-                        </button>
+                        </a>
 
                     </div>
 
@@ -83,6 +114,9 @@
         </div>
 
         {% endfor %}
+
+
+        <!-- Cart Total -->
 
         <div class="text-end mt-4">
 
@@ -95,6 +129,7 @@
             </button>
 
         </div>
+
 
     {% else %}
 
