@@ -28,6 +28,8 @@ urlpatterns = [
     path('', include('products.urls')),
 
     path("cart/", include("cart.urls")),
+    
+    path("orders/", include("orders.urls")),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
