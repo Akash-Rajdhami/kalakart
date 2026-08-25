@@ -1,153 +1,103 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <section class="container py-5">
+  <h2 class="mb-4">My Cart</h2>
 
-    <h2 class="mb-4">
-        My Cart
-    </h2>
+  {% if cart_items %} {% for item in cart_items %}
 
-    {% if cart_items %}
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <div class="row align-items-center">
+        <!-- Product Image -->
 
-        {% for item in cart_items %}
+        <div class="col-md-2">
+          {% if item.product.image %}
 
-        <div class="card mb-3 shadow-sm">
+          <img
+            src="{{ item.product.image.url }}"
+            alt="{{ item.product.name }}"
+            class="img-fluid rounded"
+          />
 
-            <div class="card-body">
-
-                <div class="row align-items-center">
-
-                    <!-- Product Image -->
-
-                    <div class="col-md-2">
-
-                        {% if item.product.image %}
-
-                        <img
-                            src="{{ item.product.image.url }}"
-                            alt="{{ item.product.name }}"
-                            class="img-fluid rounded"
-                        >
-
-                        {% endif %}
-
-                    </div>
-
-
-                    <!-- Product Information -->
-
-                    <div class="col-md-3">
-
-                        <h5>
-                            {{ item.product.name }}
-                        </h5>
-
-                        <p class="mb-1">
-                            Category: {{ item.product.category }}
-                        </p>
-
-                        <p class="mb-0">
-                            Rs. {{ item.product.price }}
-                        </p>
-
-                    </div>
-
-
-                    <!-- Quantity -->
-
-                    <div class="col-md-3">
-
-                        <div class="d-flex align-items-center">
-
-                            <a
-                                href="{% url 'decrease-quantity' item.id %}"
-                                class="btn btn-outline-secondary btn-sm"
-                            >
-                                −
-                            </a>
-
-                            <span class="mx-3 fw-bold">
-                                {{ item.quantity }}
-                            </span>
-
-                            <a
-                                href="{% url 'increase-quantity' item.id %}"
-                                class="btn btn-outline-secondary btn-sm"
-                            >
-                                +
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Item Total -->
-
-                    <div class="col-md-2">
-
-                        <strong>
-                            Rs. {% widthratio item.product.price 1 item.quantity %}
-                        </strong>
-
-                    </div>
-
-
-                    <!-- Remove -->
-
-                    <div class="col-md-2">
-
-                        <a
-                            href="{% url 'remove-from-cart' item.id %}"
-                            class="btn btn-danger btn-sm"
-                        >
-                            Remove
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+          {% endif %}
         </div>
 
-        {% endfor %}
+        <!-- Product Information -->
 
+        <div class="col-md-3">
+          <h5>{{ item.product.name }}</h5>
 
-        <!-- Cart Total -->
+          <p class="mb-1">Category: {{ item.product.category }}</p>
 
-        <div class="text-end mt-4">
-
-            <h4>
-                Total: Rs. {{ total }}
-            </h4>
-
-            <button class="btn btn-success mt-2">
-                Proceed to Checkout
-            </button>
-
+          <p class="mb-0">Rs. {{ item.product.price }}</p>
         </div>
 
+        <!-- Quantity -->
 
-    {% else %}
+        <div class="col-md-3">
+          <div class="d-flex align-items-center">
+            <a
+              href="{% url 'decrease-quantity' item.id %}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              −
+            </a>
 
-        <div class="alert alert-info">
+            <span class="mx-3 fw-bold"> {{ item.quantity }} </span>
 
-            Your cart is empty.
-
+            <a
+              href="{% url 'increase-quantity' item.id %}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              +
+            </a>
+          </div>
         </div>
 
-        <a
-            href="{% url 'shop' %}"
-            class="btn btn-warning"
-        >
-            Continue Shopping
-        </a>
+        <!-- Item Total -->
 
-    {% endif %}
+        <div class="col-md-2">
+          <strong>
+            Rs. {% widthratio item.product.price 1 item.quantity %}
+          </strong>
+        </div>
 
+        <!-- Remove -->
+
+        <div class="col-md-2">
+          <a
+            href="{% url 'remove-from-cart' item.id %}"
+            class="btn btn-danger btn-sm"
+          >
+            Remove
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+  <!-- Cart Total -->
+
+  <div class="text-end mt-4">
+    <h4>Total: Rs. {{ total }}</h4>
+
+    <a href="{% url 'checkout' %}" 
+    class="btn btn-success mt-2">
+      Proceed to Checkout
+    </a>
+  </div>
+
+  {% else %}
+
+  <div class="alert alert-info">Your cart is empty.</div>
+
+  <a href="{% url 'shop' %}" 
+  class="btn btn-warning"> 
+  Continue Shopping </a>
+
+  {% endif %}
 </section>
 
 {% endblock %}
