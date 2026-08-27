@@ -19,5 +19,11 @@ urlpatterns = [
         OrderSuccessView,
         name="order-success"
     ),
+    
+       path(
+        "my-orders/",
+        MyOrdersView,
+        name="my-orders"
+    ),
 
 ]
