@@ -29,11 +29,23 @@
 
     <nav class="navbar navbar-expand-lg shadow-sm">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="/">
-          <img src="{% static 'images/logo.png' %}" alt="Logo" height="45" />
 
-          <span class="logo-text ms-2"> KalaKart </span>
+        <!-- Logo -->
+
+        <a class="navbar-brand d-flex align-items-center" href="/">
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="Logo"
+            height="45"
+          />
+
+          <span class="logo-text ms-2">
+            KalaKart
+          </span>
         </a>
+
+
+        <!-- Mobile Menu Button -->
 
         <button
           class="navbar-toggler"
@@ -44,24 +56,50 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarContent">
+
+        <!-- Navbar Content -->
+
+        <div
+          class="collapse navbar-collapse"
+          id="navbarContent"
+        >
+
+          <!-- Main Navigation -->
+
           <ul class="navbar-nav mx-auto">
+
             <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/">
+                Home
+              </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/shop/">Shop</a>
+              <a class="nav-link" href="/shop/">
+                Shop
+              </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/about/">About</a>
+              <a class="nav-link" href="/about/">
+                About
+              </a>
             </li>
+
           </ul>
 
+
+          <!-- Right Side Navbar -->
+
           <div class="d-flex align-items-center gap-2">
+
+
+            <!-- Search -->
+
             <div class="search-box">
+
               <form action="" method="GET">
+
                 <input
                   type="search"
                   class="form-control search-input"
@@ -69,81 +107,180 @@
                   name="q"
                 />
 
-                <button type="submit" class="search-btn">
+                <button
+                  type="submit"
+                  class="search-btn"
+                >
                   <i class="bi bi-search"></i>
                 </button>
+
               </form>
+
             </div>
-            <a href="{% url 'cart' %}" class="btn btn-cart">
+
+
+            <!-- Cart -->
+
+            <a
+              href="{% url 'cart' %}"
+              class="btn btn-cart"
+            >
+
               <i class="bi bi-cart3"></i>
 
-              <span class="cart-count">0</span>
+              <span class="cart-count">
+                0
+              </span>
+
             </a>
-            <a href="{% url 'seller-dashboard' %}" class="btn btn-login">
-              Dashboard
-            </a>
+
 
             {% if user.is_authenticated %}
 
-            <span class="me-2 fw-semibold">
-              Welcome, {{ user.first_name }}
-            </span>
 
-            <a href="{% url 'logout' %}" class="btn btn-danger"> Logout </a>
+              <!-- Seller Dashboard -->
+
+              {% if user.user_type == "seller" %}
+
+              <a
+                href="{% url 'seller-dashboard' %}"
+                class="btn btn-login"
+              >
+                Dashboard
+              </a>
+
+              {% endif %}
+
+
+              <!-- My Orders -->
+
+              <a
+                href="{% url 'my-orders' %}"
+                class="btn btn-login"
+              >
+                My Orders
+              </a>
+
+
+              <!-- Welcome Message -->
+
+              <span class="me-2 fw-semibold">
+                Welcome, {{ user.first_name }}
+              </span>
+
+
+              <!-- Logout -->
+
+              <a
+                href="{% url 'logout' %}"
+                class="btn btn-danger"
+              >
+                Logout
+              </a>
+
 
             {% else %}
 
-            <a href="{% url 'login' %}" class="btn btn-login"> Login </a>
 
-            <a href="{% url 'register' %}" class="btn btn-register">
-              Register
-            </a>
+              <!-- Login -->
+
+              <a
+                href="{% url 'login' %}"
+                class="btn btn-login"
+              >
+                Login
+              </a>
+
+
+              <!-- Register -->
+
+              <a
+                href="{% url 'register' %}"
+                class="btn btn-register"
+              >
+                Register
+              </a>
+
 
             {% endif %}
+
           </div>
+
         </div>
+
       </div>
     </nav>
+
+
+    <!-- Django Messages -->
+
     {% if messages %}
 
     <div class="container mt-3">
+
       {% for message in messages %}
 
-      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
 
       {% endfor %}
+
     </div>
 
     {% endif %}
 
+
     <!-- Page Content -->
 
-    <div class="container mt-5">{% block content %} {% endblock %}</div>
+    <div class="container mt-5">
+
+      {% block content %}
+
+      {% endblock %}
+
+    </div>
+
 
     <!-- Bootstrap JS -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- Show / Hide Password -->
 
     <script>
+
       function togglePassword(inputId, button) {
+
         const input = document.getElementById(inputId);
 
         const icon = button.querySelector("i");
 
+
         if (input.type === "password") {
+
           input.type = "text";
 
           icon.classList.remove("bi-eye");
 
           icon.classList.add("bi-eye-slash");
+
         } else {
+
           input.type = "password";
 
           icon.classList.remove("bi-eye-slash");
 
           icon.classList.add("bi-eye");
+
         }
+
       }
+
     </script>
+
   </body>
 </html>
