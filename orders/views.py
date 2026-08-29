@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -80,3 +80,71 @@ def MyOrdersView(request):
         "orders/my_orders.html",
         context
     )
+
+
+@login_required
+def SellerOrdersView(request):
+
+    if request.user.user_type != "seller":
+
+        messages.error(
+            request,
+            "Only sellers can access this page."
+        )
+
+        return redirect("home")
+
+    orders = Order.objects.filter(
+        product__seller=request.user
+    ).order_by("-created_at")
+
+    context = {
+        "orders": orders,
+    }
+
+    return render(
+        request,
+        "orders/seller_orders.html",
+        context
+    )
+
+
+@login_required
+def UpdateOrderStatusView(request, id):
+
+    if request.user.user_type != "seller":
+
+        messages.error(
+            request,
+            "Only sellers can update orders."
+        )
+
+        return redirect("home")
+
+    order = get_object_or_404(
+        Order,
+        id=id,
+        product__seller=request.user
+    )
+
+    if request.method == "POST":
+
+        status = request.POST.get("status")
+
+        if status in [
+            "pending",
+            "confirmed",
+            "shipped",
+            "delivered",
+            "cancelled",
+        ]:
+
+            order.status = status
+            order.save()
+
+            messages.success(
+                request,
+                "Order status updated successfully."
+            )
+
+    return redirect("seller-orders")
