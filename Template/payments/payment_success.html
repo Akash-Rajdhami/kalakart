@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="text-center">
+
+        <h2 class="text-success mb-3">
+            Payment Successful
+        </h2>
+
+        <p>
+            Your payment was successful.
+        </p>
+
+        <a
+            href="{% url 'my-orders' %}"
+            class="btn btn-warning"
+        >
+            View My Orders
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
