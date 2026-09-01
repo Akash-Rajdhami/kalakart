@@ -4,50 +4,72 @@
 
 <section class="container py-5">
 
-    <h2 class="mb-4">
-        Seller Orders
-    </h2>
+```
+<h2 class="mb-4">
+    Seller Orders
+</h2>
 
-    {% if orders %}
+{% if orders %}
 
-        {% for order in orders %}
+    {% for order in orders %}
 
-        <div class="card shadow-sm mb-4">
+    <div class="card shadow-sm mb-4">
 
-            <div class="card-body">
+        <div class="card-body">
 
-                <h5>
-                    Order #{{ order.id }}
-                </h5>
+            <h5 class="mb-3">
+                Order #{{ order.id }}
+            </h5>
 
-                <p>
-                    Customer:
-                    {{ order.user.username }}
-                </p>
+            <p>
+                <strong>Customer:</strong>
+                {{ order.user.username }}
+            </p>
 
-                <p>
-                    Status:
-                    {{ order.status }}
-                </p>
+            <p>
+                <strong>Product:</strong>
+                {{ order.product.name }}
+            </p>
 
-                <p>
-                    Total:
-                    Rs. {{ order.total_amount }}
-                </p>
+            <p>
+                <strong>Quantity:</strong>
+                {{ order.quantity }}
+            </p>
 
-            </div>
+            <p>
+                <strong>Price:</strong>
+                Rs. {{ order.price }}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                Rs. {{ order.total_price }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ order.get_status_display }}
+            </p>
+
+            <p class="mb-0">
+                <strong>Order Date:</strong>
+                {{ order.created_at|date:"d M Y, h:i A" }}
+            </p>
 
         </div>
 
-        {% endfor %}
+    </div>
 
-    {% else %}
+    {% endfor %}
 
-        <div class="alert alert-info">
-            No orders found.
-        </div>
+{% else %}
 
-    {% endif %}
+    <div class="alert alert-info">
+        No orders found.
+    </div>
+
+{% endif %}
+```
 
 </section>
 

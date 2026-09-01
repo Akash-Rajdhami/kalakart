@@ -1,6 +1,7 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Product
+from orders.models import Order
 
 
 def SellerDashboardView(request):
@@ -98,8 +99,8 @@ def SellerOrdersView(request):
         return redirect("home")
 
     orders = Order.objects.filter(
-        items__product__seller=request.user
-    ).distinct()
+        product__seller=request.user
+    ).order_by("-created_at")
 
     context = {
         "orders": orders,
