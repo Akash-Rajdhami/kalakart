@@ -138,18 +138,25 @@
             {% if user.is_authenticated %}
 
 
-              <!-- Seller Dashboard -->
+            <!-- Seller Dashboard and Orders -->
 
-              {% if user.user_type == "seller" %}
+{% if user.user_type == "seller" %}
 
-              <a
-                href="{% url 'seller-dashboard' %}"
-                class="btn btn-login"
-              >
-                Dashboard
-              </a>
+<a
+  href="{% url 'seller-dashboard' %}"
+  class="btn btn-login"
+>
+  Dashboard
+</a>
 
-              {% endif %}
+<a
+  href="{% url 'seller-orders' %}"
+  class="btn btn-login"
+>
+  Orders
+</a>
+
+{% endif %}
 
 
               <!-- My Orders -->

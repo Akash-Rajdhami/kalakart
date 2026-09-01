@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <h2 class="mb-4">
+        Seller Orders
+    </h2>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-body">
+
+                <h5>
+                    Order #{{ order.id }}
+                </h5>
+
+                <p>
+                    Customer:
+                    {{ order.user.username }}
+                </p>
+
+                <p>
+                    Status:
+                    {{ order.status }}
+                </p>
+
+                <p>
+                    Total:
+                    Rs. {{ order.total_amount }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No orders found.
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -80,11 +80,23 @@
 
     <div class="mt-5 mb-4">
 
-        <a href="{% url 'add-product' %}" class="btn btn-warning">
+      <div class="mt-5 d-flex gap-2">
 
-            Add Product
+    <a
+        href="{% url 'add-product' %}"
+        class="btn btn-warning"
+    >
+        Add Product
+    </a>
 
-        </a>
+    <a
+        href="{% url 'seller-orders' %}"
+        class="btn btn-primary"
+    >
+        View Orders
+    </a>
+
+</div>
 
     </div>
 

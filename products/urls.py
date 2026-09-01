@@ -35,6 +35,12 @@ urlpatterns = [
         name="product-detail"
     ),
 
+    path(
+    "seller/orders/",
+    SellerOrdersView,
+    name="seller-orders"
+),
+
 ]
 
 urlpatterns += static(

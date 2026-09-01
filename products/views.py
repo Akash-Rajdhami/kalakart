@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 
@@ -87,5 +88,25 @@ def ProductDetailView(request, id):
     return render(
         request,
         "product_detail.html",
+        context
+    )
+
+@login_required
+def SellerOrdersView(request):
+
+    if request.user.user_type != "seller":
+        return redirect("home")
+
+    orders = Order.objects.filter(
+        items__product__seller=request.user
+    ).distinct()
+
+    context = {
+        "orders": orders,
+    }
+
+    return render(
+        request,
+        "seller/orders.html",
         context
     )
