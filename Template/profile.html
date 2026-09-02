@@ -36,7 +36,11 @@
         {% endif %}
 
         <h2 class="profile-name">
-          {{ user.first_name }} {{ user.last_name }}
+          {% if user.first_name or user.last_name %}
+            {{ user.first_name }} {{ user.last_name }}
+          {% else %}
+            {{ user.username }}
+          {% endif %}
         </h2>
 
         <p class="profile-username">
@@ -44,117 +48,177 @@
         </p>
 
         {% if user.user_type == "seller" %}
+
           <span class="badge bg-warning text-dark">
             Seller
           </span>
+
         {% else %}
+
           <span class="badge bg-secondary">
             Customer
           </span>
+
         {% endif %}
 
       </div>
 
 
-      <!-- Profile Information -->
+      <!-- Edit Profile Form -->
 
-      <div class="profile-info">
+      <form
+        method="POST"
+        enctype="multipart/form-data"
+        class="profile-form"
+      >
 
-        <div class="profile-info-item">
-
-          <div class="profile-info-icon">
-            <i class="bi bi-person"></i>
-          </div>
-
-          <div>
-            <small>Full Name</small>
-
-            <p>
-              {% if user.first_name or user.last_name %}
-                {{ user.first_name }} {{ user.last_name }}
-              {% else %}
-                Not provided
-              {% endif %}
-            </p>
-          </div>
-
-        </div>
+        {% csrf_token %}
 
 
-        <div class="profile-info-item">
+        <!-- First Name -->
 
-          <div class="profile-info-icon">
-            <i class="bi bi-envelope"></i>
-          </div>
+        <div class="profile-form-group">
 
-          <div>
-            <small>Email</small>
+          <label for="first_name">
+            First Name
+          </label>
 
-            <p>
-              {% if user.email %}
-                {{ user.email }}
-              {% else %}
-                Not provided
-              {% endif %}
-            </p>
-          </div>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            class="form-control"
+            value="{{ user.first_name }}"
+            placeholder="Enter your first name"
+          />
 
         </div>
 
 
-        <div class="profile-info-item">
+        <!-- Last Name -->
 
-          <div class="profile-info-icon">
-            <i class="bi bi-telephone"></i>
-          </div>
+        <div class="profile-form-group">
 
-          <div>
-            <small>Phone Number</small>
+          <label for="last_name">
+            Last Name
+          </label>
 
-            <p>
-              {% if user.phone_number %}
-                {{ user.phone_number }}
-              {% else %}
-                Not provided
-              {% endif %}
-            </p>
-          </div>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            class="form-control"
+            value="{{ user.last_name }}"
+            placeholder="Enter your last name"
+          />
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="profile-form-group">
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            value="{{ user.email }}"
+            placeholder="Enter your email"
+          />
 
         </div>
 
 
-        <div class="profile-info-item">
+        <!-- Phone Number -->
 
-          <div class="profile-info-icon">
-            <i class="bi bi-geo-alt"></i>
-          </div>
+        <div class="profile-form-group">
 
-          <div>
-            <small>Address</small>
+          <label for="phone_number">
+            Phone Number
+          </label>
 
-            <p>
-              {% if user.address %}
-                {{ user.address }}
-              {% else %}
-                Not provided
-              {% endif %}
-            </p>
-          </div>
+          <input
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            class="form-control"
+            value="{{ user.phone_number|default:'' }}"
+            placeholder="Enter your phone number"
+          />
 
         </div>
 
-      </div>
+
+        <!-- Address -->
+
+        <div class="profile-form-group">
+
+          <label for="address">
+            Address
+          </label>
+
+          <textarea
+            id="address"
+            name="address"
+            class="form-control"
+            rows="3"
+            placeholder="Enter your address"
+          >{{ user.address|default:'' }}</textarea>
+
+        </div>
 
 
-      <!-- Profile Actions -->
+        <!-- Profile Image -->
 
-      <div class="profile-actions">
+        <div class="profile-form-group">
+
+          <label for="profile_image">
+            Profile Picture
+          </label>
+
+          <input
+            type="file"
+            id="profile_image"
+            name="profile_image"
+            class="form-control"
+            accept="image/*"
+          />
+
+        </div>
+
+
+        <!-- Save Button -->
+
+        <div class="profile-actions">
+
+          <button
+            type="submit"
+            class="btn btn-profile"
+          >
+            <i class="bi bi-check-circle me-2"></i>
+            Save Changes
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <!-- Profile Links -->
+
+      <div class="profile-bottom-actions">
 
         {% if user.user_type == "customer" %}
 
           <a
             href="{% url 'my-orders' %}"
-            class="btn btn-profile"
+            class="profile-link"
           >
             <i class="bi bi-bag me-2"></i>
             My Orders
@@ -164,7 +228,7 @@
 
           <a
             href="{% url 'seller-dashboard' %}"
-            class="btn btn-profile"
+            class="profile-link"
           >
             <i class="bi bi-box-seam me-2"></i>
             My Products

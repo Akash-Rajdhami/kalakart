@@ -1,21 +1,39 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from .models import Product
-from orders.models import Order
 
 
+@login_required
 def SellerDashboardView(request):
 
-    products = Product.objects.filter(seller=request.user)
+    if request.user.user_type != "seller":
+        messages.error(request, "Only sellers can access this page.")
+        return redirect("home")
+
+    products = Product.objects.filter(
+        seller=request.user
+    )
 
     context = {
-        "products": products,
+        "products": products
     }
 
-    return render(request, "seller/dashboard.html", context)
+    return render(
+        request,
+        "seller/dashboard.html",
+        context
+    )
 
 
+@login_required
 def AddProductView(request):
+
+    if request.user.user_type != "seller":
+        messages.error(request, "Only sellers can add products.")
+        return redirect("home")
 
     if request.method == "POST":
 
@@ -29,17 +47,30 @@ def AddProductView(request):
             image=request.FILES.get("image"),
         )
 
+        messages.success(
+            request,
+            "Product added successfully."
+        )
+
         return redirect("seller-dashboard")
 
-    return render(request, "seller/add_product.html")
+    return render(
+        request,
+        "seller/add_product.html"
+    )
 
 
+@login_required
 def EditProductView(request, id):
+
+    if request.user.user_type != "seller":
+        messages.error(request, "Only sellers can edit products.")
+        return redirect("home")
 
     product = get_object_or_404(
         Product,
         id=id,
-        seller=request.user,
+        seller=request.user
     )
 
     if request.method == "POST":
@@ -55,15 +86,30 @@ def EditProductView(request, id):
 
         product.save()
 
+        messages.success(
+            request,
+            "Product updated successfully."
+        )
+
         return redirect("seller-dashboard")
 
     context = {
-        "product": product,
+        "product": product
     }
 
-    return render(request, "seller/edit_product.html", context)
+    return render(
+        request,
+        "seller/edit_product.html",
+        context
+    )
 
+
+@login_required
 def DeleteProductView(request, id):
+
+    if request.user.user_type != "seller":
+        messages.error(request, "Only sellers can delete products.")
+        return redirect("home")
 
     product = get_object_or_404(
         Product,
@@ -73,41 +119,10 @@ def DeleteProductView(request, id):
 
     product.delete()
 
+    messages.success(
+        request,
+        "Product deleted successfully."
+    )
+
     return redirect("seller-dashboard")
 
-def ProductDetailView(request, id):
-
-    product = get_object_or_404(
-        Product,
-        id=id
-    )
-
-    context = {
-        "product": product,
-    }
-
-    return render(
-        request,
-        "product_detail.html",
-        context
-    )
-
-@login_required
-def SellerOrdersView(request):
-
-    if request.user.user_type != "seller":
-        return redirect("home")
-
-    orders = Order.objects.filter(
-        product__seller=request.user
-    ).order_by("-created_at")
-
-    context = {
-        "orders": orders,
-    }
-
-    return render(
-        request,
-        "seller/orders.html",
-        context
-    )

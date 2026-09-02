@@ -144,4 +144,21 @@ def SellerDashboardView(request):
 @login_required
 def ProfileView(request):
 
+    if request.method == "POST":
+
+        request.user.first_name = request.POST.get("first_name")
+        request.user.last_name = request.POST.get("last_name")
+        request.user.email = request.POST.get("email")
+        request.user.phone_number = request.POST.get("phone_number")
+        request.user.address = request.POST.get("address")
+
+        if request.FILES.get("profile_image"):
+            request.user.profile_image = request.FILES.get("profile_image")
+
+        request.user.save()
+
+        messages.success(request, "Profile updated successfully.")
+
+        return redirect("profile")
+
     return render(request, "profile.html")

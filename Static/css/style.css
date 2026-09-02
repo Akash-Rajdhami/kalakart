@@ -1217,3 +1217,45 @@ body {
     color: white;
 }
 
+/*  Edit Profile */
+
+.profile-form {
+    padding: 30px;
+}
+
+.profile-form-group {
+    margin-bottom: 20px;
+}
+
+.profile-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.profile-form-group .form-control {
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.profile-form-group .form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 0.2rem rgba(251, 146, 60, 0.15);
+}
+
+.profile-bottom-actions {
+    padding: 0 30px 30px;
+    text-align: center;
+}
+
+.profile-link {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
+
