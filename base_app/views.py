@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from accounts.models import CustomUser
@@ -25,8 +25,22 @@ def AboutView(request):
     return render(request, "about.html")
 
 
-def ProductDetailView(request):
-    return render(request, "product_detail.html")
+def ProductDetailView(request, id):
+
+    product = get_object_or_404(
+        Product,
+        id=id
+    )
+
+    context = {
+        "product": product
+    }
+
+    return render(
+        request,
+        "product_detail.html",
+        context
+    )
 
 
 def RegisterView(request):

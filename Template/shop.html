@@ -1,64 +1,73 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block content %}
-
 
 <section class="shop-banner">
 
-    <div class="container text-center">
+```
+<div class="container text-center">
 
-        <h1 class="shop-title">
-            Explore Handmade Products
-        </h1>
+    <h1 class="shop-title">
+        Explore Handmade Products
+    </h1>
 
-        <p class="shop-description">
-            Discover unique handmade and cultural products created by talented artists across Nepal.
-        </p>
+    <p class="shop-description">
+        Discover unique handmade and cultural products created by talented artists across Nepal.
+    </p>
 
-    </div>
+</div>
+```
 
 </section>
 
-
-
 <section class="shop-products">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
+        {% if products %}
+
+            {% for product in products %}
 
             <div class="col-lg-3 col-md-6 mb-4">
 
                 <div class="shop-card">
 
-                    <img
-                        src="{% static 'images/product-placeholder.jpg' %}"
-                        alt="Handmade Clay Vase"
-                        class="shop-image"
-                    >
+                    {% if product.image %}
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="shop-image"
+                        >
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+
 
                     <div class="shop-content">
 
                         <span class="shop-category">
-                            Pottery
+                            {{ product.category }}
                         </span>
 
                         <h4 class="product-name">
-                            Handmade Clay Vase
+                            {{ product.name }}
                         </h4>
 
                         <p class="shop-description-card">
-                            Beautiful handcrafted clay vase made by skilled local artisans.
+                            {{ product.description|truncatewords:15 }}
                         </p>
 
                         <p class="shop-price">
-                            Rs. 2500
+                            Rs. {{ product.price }}
                         </p>
 
-                        <a href="{% url 'product-detail' %}" class="shop-btn">
+                        <a
+                            href="{% url 'product-detail' product.id %}"
+                            class="shop-btn"
+                        >
                             View Details
                         </a>
 
@@ -68,129 +77,24 @@
 
             </div>
 
+            {% endfor %}
 
+        {% else %}
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-12 text-center">
 
-                <div class="shop-card">
-
-                    <img
-                        src="{% static 'images/product-placeholder.jpg' %}"
-                        alt="Mithila Painting"
-                        class="shop-image"
-                    >
-
-                    <div class="shop-content">
-
-                        <span class="shop-category">
-                            Painting
-                        </span>
-
-                        <h4 class="product-name">
-                            Mithila Painting
-                        </h4>
-
-                        <p class="shop-description-card">
-                            Traditional artwork inspired by Nepalese culture and heritage.
-                        </p>
-
-                        <p class="shop-price">
-                            Rs. 4500
-                        </p>
-
-                        <a href="{% url 'product-detail' %}" class="shop-btn">
-                            View Details
-                        </a>
-
-                    </div>
-
+                <div class="alert alert-info">
+                    No products are available yet.
                 </div>
 
             </div>
 
-
-
-            <div class="col-lg-3 col-md-6 mb-4">
-
-                <div class="shop-card">
-
-                    <img
-                        src="{% static 'images/product-placeholder.jpg' %}"
-                        alt="Traditional Necklace"
-                        class="shop-image"
-                    >
-
-                    <div class="shop-content">
-
-                        <span class="shop-category">
-                            Jewelry
-                        </span>
-
-                        <h4 class="product-name">
-                            Traditional Necklace
-                        </h4>
-
-                        <p class="shop-description-card">
-                            Elegant handmade jewelry crafted with cultural inspiration.
-                        </p>
-
-                        <p class="shop-price">
-                            Rs. 1800
-                        </p>
-
-                        <a href="{% url 'product-detail' %}" class="shop-btn">
-                            View Details
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="col-lg-3 col-md-6 mb-4">
-
-                <div class="shop-card">
-
-                    <img
-                        src="{% static 'images/product-placeholder.jpg' %}"
-                        alt="Wooden Buddha Statue"
-                        class="shop-image"
-                    >
-
-                    <div class="shop-content">
-
-                        <span class="shop-category">
-                            Wooden Art
-                        </span>
-
-                        <h4 class="product-name">
-                            Wooden Buddha Statue
-                        </h4>
-
-                        <p class="shop-description-card">
-                            Hand-carved wooden artwork showcasing traditional craftsmanship.
-                        </p>
-
-                        <p class="shop-price">
-                            Rs. 3800
-                        </p>
-
-                        <a href="{% url 'product-detail' %}" class="shop-btn">
-                            View Details
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+        {% endif %}
 
     </div>
+
+</div>
+```
 
 </section>
 
