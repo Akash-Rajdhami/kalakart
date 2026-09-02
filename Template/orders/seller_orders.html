@@ -4,157 +4,201 @@
 
 <section class="container py-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<!-- Page Header -->
 
-        <h2>
-            Seller Orders
-        </h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-        <a
-            href="{% url 'seller-dashboard' %}"
-            class="btn btn-secondary"
-        >
-            Back to Dashboard
-        </a>
-
+    <div>
+        <h2 class="mb-1">Seller Orders</h2>
+        <p class="text-muted mb-0">
+            Manage orders placed for your products.
+        </p>
     </div>
 
+    <a
+        href="{% url 'seller-dashboard' %}"
+        class="btn btn-secondary"
+    >
+        Back to Dashboard
+    </a>
 
-    {% if orders %}
-
-        {% for order in orders %}
-
-        <div class="card shadow-sm mb-3">
-
-            <div class="card-body">
-
-                <div class="row align-items-center">
+</div>
 
 
-                    <!-- Customer -->
+{% if orders %}
 
-                    <div class="col-md-3">
+    {% for order in orders %}
 
-                        <h5>
-                            {{ order.product.name }}
-                        </h5>
+    <div class="card shadow-sm mb-4">
 
-                        <p class="mb-1">
-                            Customer:
-                            {{ order.user.username }}
-                        </p>
+        <div class="card-body">
 
-                        <p class="mb-0">
-                            Quantity:
-                            {{ order.quantity }}
-                        </p>
-
-                    </div>
+            <div class="row align-items-center g-3">
 
 
-                    <!-- Price -->
+                <!-- Product & Customer -->
 
-                    <div class="col-md-2">
+                <div class="col-lg-3 col-md-6">
 
-                        <strong>
-                            Rs. {{ order.total_price }}
-                        </strong>
+                    <h5 class="mb-2">
+                        {{ order.product.name }}
+                    </h5>
 
-                    </div>
+                    <p class="mb-1">
+                        <strong>Customer:</strong>
+                        {{ order.user.username }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Quantity:</strong>
+                        {{ order.quantity }}
+                    </p>
+
+                </div>
 
 
-                    <!-- Date -->
+                <!-- Price -->
 
-                    <div class="col-md-2">
+                <div class="col-lg-2 col-md-6">
 
-                        <small class="text-muted">
-                            {{ order.created_at|date:"M d, Y" }}
-                        </small>
+                    <small class="text-muted d-block">
+                        Total Amount
+                    </small>
 
-                    </div>
+                    <strong class="fs-5">
+                        Rs. {{ order.total_price }}
+                    </strong>
+
+                </div>
 
 
-                    <!-- Current Status -->
+                <!-- Order Date -->
 
-                    <div class="col-md-2">
+                <div class="col-lg-2 col-md-6">
+
+                    <small class="text-muted d-block">
+                        Order Date
+                    </small>
+
+                    <span>
+                        {{ order.created_at|date:"M d, Y" }}
+                    </span>
+
+                </div>
+
+
+                <!-- Current Status -->
+
+                <div class="col-lg-2 col-md-6">
+
+                    <small class="text-muted d-block mb-1">
+                        Current Status
+                    </small>
+
+                    {% if order.status == "pending" %}
 
                         <span class="badge bg-warning text-dark">
-
-                            {{ order.status|title }}
-
+                            Pending
                         </span>
 
-                    </div>
+                    {% elif order.status == "confirmed" %}
+
+                        <span class="badge bg-primary">
+                            Confirmed
+                        </span>
+
+                    {% elif order.status == "shipped" %}
+
+                        <span class="badge bg-info text-dark">
+                            Shipped
+                        </span>
+
+                    {% elif order.status == "delivered" %}
+
+                        <span class="badge bg-success">
+                            Delivered
+                        </span>
+
+                    {% elif order.status == "cancelled" %}
+
+                        <span class="badge bg-danger">
+                            Cancelled
+                        </span>
+
+                    {% endif %}
+
+                </div>
 
 
-                    <!-- Update Status -->
+                <!-- Update Status -->
 
-                    <div class="col-md-3">
+                <div class="col-lg-3 col-md-12">
 
-                        <form
-                            method="POST"
-                            action="{% url 'update-order-status' order.id %}"
-                        >
+                    <form
+                        method="POST"
+                        action="{% url 'update-order-status' order.id %}"
+                    >
 
-                            {% csrf_token %}
+                        {% csrf_token %}
 
-                            <div class="input-group">
+                        <label class="form-label small text-muted">
+                            Update Status
+                        </label>
 
-                                <select
-                                    name="status"
-                                    class="form-select"
+                        <div class="input-group">
+
+                            <select
+                                name="status"
+                                class="form-select"
+                            >
+
+                                <option
+                                    value="pending"
+                                    {% if order.status == "pending" %}selected{% endif %}
                                 >
+                                    Pending
+                                </option>
 
-                                    <option
-                                        value="pending"
-                                        {% if order.status == "pending" %}selected{% endif %}
-                                    >
-                                        Pending
-                                    </option>
-
-                                    <option
-                                        value="confirmed"
-                                        {% if order.status == "confirmed" %}selected{% endif %}
-                                    >
-                                        Confirmed
-                                    </option>
-
-                                    <option
-                                        value="shipped"
-                                        {% if order.status == "shipped" %}selected{% endif %}
-                                    >
-                                        Shipped
-                                    </option>
-
-                                    <option
-                                        value="delivered"
-                                        {% if order.status == "delivered" %}selected{% endif %}
-                                    >
-                                        Delivered
-                                    </option>
-
-                                    <option
-                                        value="cancelled"
-                                        {% if order.status == "cancelled" %}selected{% endif %}
-                                    >
-                                        Cancelled
-                                    </option>
-
-                                </select>
-
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-warning"
+                                <option
+                                    value="confirmed"
+                                    {% if order.status == "confirmed" %}selected{% endif %}
                                 >
-                                    Update
-                                </button>
+                                    Confirmed
+                                </option>
 
-                            </div>
+                                <option
+                                    value="shipped"
+                                    {% if order.status == "shipped" %}selected{% endif %}
+                                >
+                                    Shipped
+                                </option>
 
-                        </form>
+                                <option
+                                    value="delivered"
+                                    {% if order.status == "delivered" %}selected{% endif %}
+                                >
+                                    Delivered
+                                </option>
 
-                    </div>
+                                <option
+                                    value="cancelled"
+                                    {% if order.status == "cancelled" %}selected{% endif %}
+                                >
+                                    Cancelled
+                                </option>
+
+                            </select>
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning"
+                            >
+                                Update
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
@@ -162,17 +206,38 @@
 
         </div>
 
-        {% endfor %}
+    </div>
 
-    {% else %}
+    {% endfor %}
 
-        <div class="alert alert-info">
+{% else %}
 
-            No orders have been placed for your products yet.
+    <!-- No Orders -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-body text-center py-5">
+
+            <h4 class="mb-2">
+                No Orders Yet
+            </h4>
+
+            <p class="text-muted mb-4">
+                No customers have placed orders for your products yet.
+            </p>
+
+            <a
+                href="{% url 'seller-dashboard' %}"
+                class="btn btn-warning"
+            >
+                Back to Dashboard
+            </a>
 
         </div>
 
-    {% endif %}
+    </div>
+
+{% endif %}
 
 </section>
 

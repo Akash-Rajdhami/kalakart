@@ -4,21 +4,47 @@
 
 <section class="container py-5">
 
-    <h2 class="mb-4">Seller Dashboard</h2>
+    <!-- Dashboard Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <!-- Dashboard Cards -->
+        <div>
+            <h2 class="mb-1">
+                Seller Dashboard
+            </h2>
 
-    <div class="row g-4">
+            <p class="text-muted mb-0">
+                Welcome,
+                {{ request.user.first_name|default:request.user.username }}
+            </p>
+        </div>
 
-        <div class="col-md-3">
+        <a
+            href="{% url 'add-product' %}"
+            class="btn btn-warning"
+        >
+            + Add Product
+        </a>
 
-            <div class="card shadow-sm">
+    </div>
+
+
+    <!-- Dashboard Statistics -->
+    <div class="row g-4 mb-5">
+
+        <!-- Products -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow-sm h-100">
 
                 <div class="card-body text-center">
 
-                    <h4>{{ products.count }}</h4>
+                    <h3 class="fw-bold mb-2">
+                        {{ products.count }}
+                    </h3>
 
-                    <p>Products</p>
+                    <p class="mb-0 text-muted">
+                        My Products
+                    </p>
 
                 </div>
 
@@ -26,15 +52,21 @@
 
         </div>
 
-        <div class="col-md-3">
 
-            <div class="card shadow-sm">
+        <!-- Orders -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow-sm h-100">
 
                 <div class="card-body text-center">
 
-                    <h4>0</h4>
+                    <h3 class="fw-bold mb-2">
+                        0
+                    </h3>
 
-                    <p>Orders</p>
+                    <p class="mb-0 text-muted">
+                        Orders
+                    </p>
 
                 </div>
 
@@ -42,15 +74,21 @@
 
         </div>
 
-        <div class="col-md-3">
 
-            <div class="card shadow-sm">
+        <!-- Revenue -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow-sm h-100">
 
                 <div class="card-body text-center">
 
-                    <h4>Rs. 0</h4>
+                    <h3 class="fw-bold mb-2">
+                        Rs. 0
+                    </h3>
 
-                    <p>Revenue</p>
+                    <p class="mb-0 text-muted">
+                        Revenue
+                    </p>
 
                 </div>
 
@@ -58,15 +96,21 @@
 
         </div>
 
-        <div class="col-md-3">
 
-            <div class="card shadow-sm">
+        <!-- Seller Status -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow-sm h-100">
 
                 <div class="card-body text-center">
 
-                    <h4>Active</h4>
+                    <h3 class="fw-bold mb-2">
+                        Active
+                    </h3>
 
-                    <p>Status</p>
+                    <p class="mb-0 text-muted">
+                        Seller Status
+                    </p>
 
                 </div>
 
@@ -76,103 +120,169 @@
 
     </div>
 
-    <!-- Add Product Button -->
 
-    <div class="mt-5 mb-4">
+    <!-- Quick Actions -->
+    <div class="card shadow-sm mb-5">
 
-      <div class="mt-5 d-flex gap-2">
+        <div class="card-body p-4">
 
-    <a
-        href="{% url 'add-product' %}"
-        class="btn btn-warning"
-    >
-        Add Product
-    </a>
+            <h4 class="mb-3">
+                Quick Actions
+            </h4>
 
-    <a
-        href="{% url 'seller-orders' %}"
-        class="btn btn-primary"
-    >
-        View Orders
-    </a>
+            <div class="d-flex flex-wrap gap-2">
 
-</div>
+                <!-- Add Product -->
+                <a
+                    href="{% url 'add-product' %}"
+                    class="btn btn-warning"
+                >
+                    Add Product
+                </a>
+
+
+                <!-- Manage Products -->
+                <a
+                    href="#my-products"
+                    class="btn btn-dark"
+                >
+                    Manage Products
+                </a>
+
+
+                <!-- View Orders -->
+                <a
+                    href="{% url 'seller-orders' %}"
+                    class="btn btn-primary"
+                >
+                    View Orders
+                </a>
+
+
+                <!-- View Shop -->
+                <a
+                    href="{% url 'shop' %}"
+                    class="btn btn-outline-secondary"
+                >
+                    View Shop
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <hr>
 
-    <h3 class="mb-4">My Products</h3>
+    <!-- My Products -->
+    <div
+        id="my-products"
+        class="d-flex justify-content-between align-items-center mb-4"
+    >
 
+        <div>
+
+            <h3 class="mb-1">
+                My Products
+            </h3>
+
+            <p class="text-muted mb-0">
+                Manage the products you have added.
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'add-product' %}"
+            class="btn btn-warning"
+        >
+            + Add Product
+        </a>
+
+    </div>
+
+
+    <!-- Product List -->
     <div class="row">
 
         {% for product in products %}
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card shadow h-100">
+            <div class="card shadow-sm h-100">
 
+                <!-- Product Image -->
                 {% if product.image %}
 
                 <img
                     src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
                     class="card-img-top"
-                    style="height:250px; object-fit:cover;"
+                    style="height: 250px; object-fit: cover;"
                 >
+
+                {% else %}
+
+                <div
+                    class="d-flex align-items-center justify-content-center bg-light"
+                    style="height: 250px;"
+                >
+                    <span class="text-muted">
+                        No image available
+                    </span>
+                </div>
 
                 {% endif %}
 
-                <div class="card-body">
 
+                <!-- Product Information -->
+                <div class="card-body d-flex flex-column">
+
+                    <!-- Category -->
+                    <span
+                        class="badge bg-secondary align-self-start mb-2"
+                    >
+                        {{ product.category }}
+                    </span>
+
+
+                    <!-- Product Name -->
                     <h5 class="card-title">
-
                         {{ product.name }}
-
                     </h5>
 
+
+                    <!-- Price -->
                     <p class="mb-2">
-
-                        <strong>Category:</strong>
-
-                        {{ product.category }}
-
-                    </p>
-
-                    <p class="mb-2">
-
                         <strong>Price:</strong>
-
                         Rs. {{ product.price }}
-
                     </p>
 
+
+                    <!-- Stock -->
                     <p class="mb-3">
-
                         <strong>Stock:</strong>
-
                         {{ product.stock }}
-
                     </p>
 
-                    <div class="d-flex gap-2">
+
+                    <!-- Edit/Delete Buttons -->
+                    <div class="mt-auto d-flex gap-2">
 
                         <a
                             href="{% url 'edit-product' product.id %}"
                             class="btn btn-warning w-50"
                         >
-
                             Edit
-
                         </a>
+
 
                         <a
                             href="{% url 'delete-product' product.id %}"
                             class="btn btn-danger w-50"
                             onclick="return confirm('Are you sure you want to delete this product?')"
                         >
-
                             Delete
-
                         </a>
 
                     </div>
@@ -183,13 +293,32 @@
 
         </div>
 
+
         {% empty %}
 
+        <!-- No Products -->
         <div class="col-12">
 
-            <div class="alert alert-info text-center">
+            <div class="card shadow-sm">
 
-                No products added yet.
+                <div class="card-body text-center py-5">
+
+                    <h5 class="mb-2">
+                        No Products Yet
+                    </h5>
+
+                    <p class="text-muted mb-4">
+                        You have not added any products yet.
+                    </p>
+
+                    <a
+                        href="{% url 'add-product' %}"
+                        class="btn btn-warning"
+                    >
+                        Add Your First Product
+                    </a>
+
+                </div>
 
             </div>
 

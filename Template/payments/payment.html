@@ -10,22 +10,63 @@
 
             <div class="card shadow-sm">
 
-                <div class="card-body text-center">
+                <div class="card-body">
 
-                    <h2 class="mb-4">
+                    <h2 class="mb-4 text-center">
                         Payment
                     </h2>
 
-                    <p class="mb-4">
-                        Choose Khalti to continue with your payment.
+                    <p class="text-center mb-4">
+                        Review your order and continue with Khalti.
                     </p>
 
-                    <a
-                        href="#"
-                        class="btn btn-warning w-100"
-                    >
-                        Pay with Khalti
-                    </a>
+
+                    {% for item in cart_items %}
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+
+                        <div>
+                            {{ item.product.name }}
+
+                            <small class="text-muted">
+                                × {{ item.quantity }}
+                            </small>
+                        </div>
+
+                        <div>
+                            Rs. {{ item.product.price|floatformat:2 }}
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                        <h5>
+                            Total
+                        </h5>
+
+                        <h5>
+                            Rs. {{ total|floatformat:2 }}
+                        </h5>
+
+                    </div>
+
+
+                    <form method="POST" class="mt-4">
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning w-100"
+                        >
+                            Pay with Khalti
+                        </button>
+
+                    </form>
 
                 </div>
 

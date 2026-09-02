@@ -4,24 +4,54 @@
 
 <section class="container py-5">
 
-    <div class="text-center">
 
-        <h2 class="text-danger mb-3">
-            Payment Failed
-        </h2>
+<div class="row justify-content-center">
 
-        <p>
-            Your payment could not be completed.
-        </p>
+    <div class="col-md-6">
 
-        <a
-            href="{% url 'checkout' %}"
-            class="btn btn-warning"
-        >
-            Back to Checkout
-        </a>
+        <div class="card shadow-sm text-center">
+
+            <div class="card-body py-5">
+
+                <h2 class="text-danger mb-3">
+                    Payment Failed
+                </h2>
+
+                <p class="mb-4">
+                    Your payment was not completed.
+                </p>
+
+                <p class="text-muted">
+                    Your cart items are still saved.
+                    You can try the payment again.
+                </p>
+
+                <div class="mt-4">
+
+                    <a
+                        href="{% url 'payment' %}"
+                        class="btn btn-warning me-2"
+                    >
+                        Try Again
+                    </a>
+
+                    <a
+                        href="{% url 'cart' %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        Back to Cart
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
+
+</div>
+
 
 </section>
 

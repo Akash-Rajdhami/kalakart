@@ -20,28 +20,11 @@ def CheckoutView(request):
     total = 0
 
     for item in cart_items:
-        total += item.product.price * item.quantity
+        item.subtotal = item.product.price * item.quantity
+        total += item.subtotal
 
     if request.method == "POST":
-
-        for item in cart_items:
-
-            Order.objects.create(
-                user=request.user,
-                product=item.product,
-                quantity=item.quantity,
-                price=item.product.price,
-                total_price=item.product.price * item.quantity,
-            )
-
-        cart_items.delete()
-
-        messages.success(
-            request,
-            "Your order has been placed successfully!"
-        )
-
-        return redirect("order-success")
+        return redirect("payment")
 
     context = {
         "cart_items": cart_items,

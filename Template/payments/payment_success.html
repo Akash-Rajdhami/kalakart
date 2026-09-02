@@ -4,24 +4,60 @@
 
 <section class="container py-5">
 
-    <div class="text-center">
 
-        <h2 class="text-success mb-3">
-            Payment Successful
-        </h2>
+<div class="row justify-content-center">
 
-        <p>
-            Your payment was successful.
-        </p>
+    <div class="col-md-6">
 
-        <a
-            href="{% url 'my-orders' %}"
-            class="btn btn-warning"
-        >
-            View My Orders
-        </a>
+        <div class="card shadow-sm text-center">
+
+            <div class="card-body py-5">
+
+                <h2 class="text-success mb-3">
+                    Payment Successful!
+                </h2>
+
+                <p class="mb-3">
+                    Your payment has been completed successfully.
+                </p>
+
+                <p class="text-muted">
+                    Your order has been placed.
+                </p>
+
+                {% if transaction_id %}
+                <p>
+                    <strong>Transaction ID:</strong>
+                    {{ transaction_id }}
+                </p>
+                {% endif %}
+
+                <div class="mt-4">
+
+                    <a
+                        href="{% url 'my-orders' %}"
+                        class="btn btn-warning me-2"
+                    >
+                        View My Orders
+                    </a>
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        Continue Shopping
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
+
+</div>
+
 
 </section>
 
