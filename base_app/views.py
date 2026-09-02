@@ -7,7 +7,20 @@ from django.contrib.auth.decorators import login_required
 from products.models import Product
 
 def HomeView(request):
-    return render(request, "home.html")
+
+    featured_products = Product.objects.order_by(
+        "-created_at"
+    )[:4]
+
+    context = {
+        "featured_products": featured_products,
+    }
+
+    return render(
+        request,
+        "home.html",
+        context
+    )
 
 
 def ShopView(request):

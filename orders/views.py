@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from cart.models import Cart
 from .models import Order
+from django.db import transaction
 
 
 @login_required
@@ -104,30 +105,74 @@ def UpdateOrderStatusView(request, id):
 
         return redirect("home")
 
+
     order = get_object_or_404(
         Order,
         id=id,
         product__seller=request.user
     )
 
+
     if request.method == "POST":
 
-        status = request.POST.get("status")
+        new_status = request.POST.get("status")
 
-        if status in [
+        valid_statuses = [
             "pending",
             "confirmed",
             "shipped",
             "delivered",
             "cancelled",
-        ]:
+        ]
 
-            order.status = status
+
+        if new_status not in valid_statuses:
+
+            messages.error(
+                request,
+                "Invalid order status."
+            )
+
+            return redirect("seller-orders")
+
+
+        # Reduce stock only when order is approved
+        if (
+            order.status == "pending"
+            and new_status == "confirmed"
+        ):
+
+            product = order.product
+
+            if product.stock < order.quantity:
+
+                messages.error(
+                    request,
+                    "Not enough stock available to confirm this order."
+                )
+
+                return redirect("seller-orders")
+
+
+            with transaction.atomic():
+
+                product.stock -= order.quantity
+                product.save()
+
+                order.status = "confirmed"
+                order.save()
+
+
+        else:
+
+            order.status = new_status
             order.save()
 
-            messages.success(
-                request,
-                "Order status updated successfully."
-            )
+
+        messages.success(
+            request,
+            "Order status updated successfully."
+        )
+
 
     return redirect("seller-orders")

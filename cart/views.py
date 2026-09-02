@@ -1,22 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from products.models import Product
 from .models import Cart
 
 
+@login_required
 def AddToCartView(request, id):
 
-    if not request.user.is_authenticated:
-        messages.error(
-            request,
-            "Please login to add products to cart."
-        )
-        return redirect("login")
+    product = get_object_or_404(Product, id=id)
 
-    product = get_object_or_404(
-        Product,
-        id=id
-    )
+    if product.stock <= 0:
+        messages.error(request, "This product is out of stock.")
+        return redirect("product-detail", id=product.id)
 
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
@@ -26,38 +23,26 @@ def AddToCartView(request, id):
     if not created:
 
         if cart_item.quantity < product.stock:
-
             cart_item.quantity += 1
             cart_item.save()
 
         else:
-
             messages.error(
                 request,
                 "You cannot add more than the available stock."
             )
-
-            return redirect(
-                "product-detail",
-                id=product.id
-            )
+            return redirect("product-detail", id=product.id)
 
     messages.success(
         request,
         f"{product.name} added to your cart."
     )
 
-    return redirect(
-        "product-detail",
-        id=product.id
-    )
+    return redirect("product-detail", id=product.id)
 
 
+@login_required
 def CartView(request):
-
-    if not request.user.is_authenticated:
-        messages.error(request, "Please login to view your cart.")
-        return redirect("login")
 
     cart_items = Cart.objects.filter(
         user=request.user
@@ -66,7 +51,10 @@ def CartView(request):
     total = 0
 
     for item in cart_items:
-        total += item.product.price * item.quantity
+
+        item.subtotal = item.product.price * item.quantity
+
+        total += item.subtotal
 
     context = {
         "cart_items": cart_items,
@@ -80,6 +68,7 @@ def CartView(request):
     )
 
 
+@login_required
 def IncreaseQuantityView(request, id):
 
     cart_item = get_object_or_404(
@@ -103,6 +92,7 @@ def IncreaseQuantityView(request, id):
     return redirect("cart")
 
 
+@login_required
 def DecreaseQuantityView(request, id):
 
     cart_item = get_object_or_404(
@@ -112,14 +102,18 @@ def DecreaseQuantityView(request, id):
     )
 
     if cart_item.quantity > 1:
+
         cart_item.quantity -= 1
         cart_item.save()
+
     else:
+
         cart_item.delete()
 
     return redirect("cart")
 
 
+@login_required
 def RemoveFromCartView(request, id):
 
     cart_item = get_object_or_404(

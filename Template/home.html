@@ -224,61 +224,43 @@
     </div>
 
     <div class="row">
+      {% for product in featured_products %}
       <div class="col-md-3 mb-4">
         <div class="product-card">
-          <img src="{% static 'images/product1.jpg' %}" class="product-image" />
+
+          {% if product.image %}
+          <img
+            src="{{ product.image.url }}"
+            class="product-image"
+            alt="{{ product.name }}"
+          />
+          {% endif %}
 
           <div class="product-content">
-            <h4>Handmade Clay Vase</h4>
+            <h4>{{ product.name }}</h4>
 
-            <p class="product-price">Rs. 2500</p>
+            <p class="product-price">
+              Rs. {{ product.price }}
+            </p>
 
-            <a href="/shop/" class="btn-product"> View Product </a>
+            <a
+              href="{% url 'product-detail' product.id %}"
+              class="btn-product"
+            >
+              View Product
+            </a>
           </div>
+
         </div>
       </div>
 
-      <div class="col-md-3 mb-4">
-        <div class="product-card">
-          <img src="{% static 'images/product2.jpg' %}" class="product-image" />
-
-          <div class="product-content">
-            <h4>Mithila Painting</h4>
-
-            <p class="product-price">Rs. 4500</p>
-
-            <a href="/shop/" class="btn-product"> View Product </a>
-          </div>
-        </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">
+          No featured products available yet.
+        </p>
       </div>
-
-      <div class="col-md-3 mb-4">
-        <div class="product-card">
-          <img src="{% static 'images/product3.jpg' %}" class="product-image" />
-
-          <div class="product-content">
-            <h4>Wooden Buddha Statue</h4>
-
-            <p class="product-price">Rs. 3800</p>
-
-            <a href="/shop/" class="btn-product"> View Product </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-4">
-        <div class="product-card">
-          <img src="{% static 'images/product4.jpg' %}" class="product-image" />
-
-          <div class="product-content">
-            <h4>Traditional Necklace</h4>
-
-            <p class="product-price">Rs. 1800</p>
-
-            <a href="/shop/" class="btn-product"> View Product </a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>

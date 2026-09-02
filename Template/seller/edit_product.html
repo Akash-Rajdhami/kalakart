@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Edit Product</h2>
+
+                <a href="{% url 'seller-dashboard' %}" class="btn btn-secondary">
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                Product Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-control"
+                                value="{{ product.name }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">
+                                Category
+                            </label>
+
+                            <select
+                                id="category"
+                                name="category"
+                                class="form-select"
+                                required
+                            >
+                                <option value="Painting"
+                                    {% if product.category == "Painting" %}selected{% endif %}>
+                                    Painting
+                                </option>
+
+                                <option value="Handicraft"
+                                    {% if product.category == "Handicraft" %}selected{% endif %}>
+                                    Handicraft
+                                </option>
+
+                                <option value="Jewelry"
+                                    {% if product.category == "Jewelry" %}selected{% endif %}>
+                                    Jewelry
+                                </option>
+
+                                <option value="Pottery"
+                                    {% if product.category == "Pottery" %}selected{% endif %}>
+                                    Pottery
+                                </option>
+
+                                <option value="Wooden Art"
+                                    {% if product.category == "Wooden Art" %}selected{% endif %}>
+                                    Wooden Art
+                                </option>
+
+                                <option value="Traditional Wear"
+                                    {% if product.category == "Traditional Wear" %}selected{% endif %}>
+                                    Traditional Wear
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                class="form-control"
+                                rows="5"
+                                required
+                            >{{ product.description }}</textarea>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="price" class="form-label">
+                                    Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="price"
+                                    name="price"
+                                    class="form-control"
+                                    value="{{ product.price }}"
+                                    min="0"
+                                    step="0.01"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="stock" class="form-label">
+                                    Stock
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="stock"
+                                    name="stock"
+                                    class="form-control"
+                                    value="{{ product.stock }}"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label for="image" class="form-label">
+                                Product Image
+                            </label>
+
+                            {% if product.image %}
+                            <div class="mb-3">
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    style="width: 150px; height: 150px; object-fit: cover;"
+                                    class="rounded"
+                                >
+                            </div>
+                            {% endif %}
+
+                            <input
+                                type="file"
+                                id="image"
+                                name="image"
+                                class="form-control"
+                            >
+
+                            <small class="text-muted">
+                                Leave empty if you want to keep the current image.
+                            </small>
+
+                        </div>
+
+                        <div class="d-flex gap-2">
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning"
+                            >
+                                Update Product
+                            </button>
+
+                            <a
+                                href="{% url 'seller-dashboard' %}"
+                                class="btn btn-secondary"
+                            >
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
