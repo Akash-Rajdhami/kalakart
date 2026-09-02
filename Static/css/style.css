@@ -1070,3 +1070,32 @@ body {
 .search-btn:hover{
     color: var(--main-color);
 }
+
+/* Shop Categories */
+
+.shop-categories {
+    padding: 30px 0;
+}
+
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background-color: var(--main-color);
+    color: white;
+}

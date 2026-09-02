@@ -12,10 +12,19 @@ def HomeView(request):
 
 def ShopView(request):
 
-    products = Product.objects.all()
+    category = request.GET.get("category")
+
+    if category:
+        products = Product.objects.filter(category=category)
+    else:
+        products = Product.objects.all()
+
+    categories = Product.CATEGORY_CHOICES
 
     context = {
-        "products": products
+        "products": products,
+        "categories": categories,
+        "selected_category": category,
     }
 
     return render(request, "shop.html", context)
