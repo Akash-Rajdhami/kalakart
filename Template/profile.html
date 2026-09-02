@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - KalaKart{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+
+  <div class="container">
+
+
+<div class="row justify-content-center">
+
+  <div class="col-lg-8">
+
+    <div class="profile-card shadow-sm">
+
+      <!-- Profile Header -->
+
+      <div class="profile-header text-center">
+
+        {% if user.profile_image %}
+
+          <img
+            src="{{ user.profile_image.url }}"
+            alt="Profile Image"
+            class="profile-image"
+          />
+
+        {% else %}
+
+          <div class="profile-placeholder">
+            <i class="bi bi-person"></i>
+          </div>
+
+        {% endif %}
+
+        <h2 class="profile-name">
+          {{ user.first_name }} {{ user.last_name }}
+        </h2>
+
+        <p class="profile-username">
+          @{{ user.username }}
+        </p>
+
+        {% if user.user_type == "seller" %}
+          <span class="badge bg-warning text-dark">
+            Seller
+          </span>
+        {% else %}
+          <span class="badge bg-secondary">
+            Customer
+          </span>
+        {% endif %}
+
+      </div>
+
+
+      <!-- Profile Information -->
+
+      <div class="profile-info">
+
+        <div class="profile-info-item">
+
+          <div class="profile-info-icon">
+            <i class="bi bi-person"></i>
+          </div>
+
+          <div>
+            <small>Full Name</small>
+
+            <p>
+              {% if user.first_name or user.last_name %}
+                {{ user.first_name }} {{ user.last_name }}
+              {% else %}
+                Not provided
+              {% endif %}
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="profile-info-item">
+
+          <div class="profile-info-icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+
+          <div>
+            <small>Email</small>
+
+            <p>
+              {% if user.email %}
+                {{ user.email }}
+              {% else %}
+                Not provided
+              {% endif %}
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="profile-info-item">
+
+          <div class="profile-info-icon">
+            <i class="bi bi-telephone"></i>
+          </div>
+
+          <div>
+            <small>Phone Number</small>
+
+            <p>
+              {% if user.phone_number %}
+                {{ user.phone_number }}
+              {% else %}
+                Not provided
+              {% endif %}
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="profile-info-item">
+
+          <div class="profile-info-icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+
+          <div>
+            <small>Address</small>
+
+            <p>
+              {% if user.address %}
+                {{ user.address }}
+              {% else %}
+                Not provided
+              {% endif %}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Profile Actions -->
+
+      <div class="profile-actions">
+
+        {% if user.user_type == "customer" %}
+
+          <a
+            href="{% url 'my-orders' %}"
+            class="btn btn-profile"
+          >
+            <i class="bi bi-bag me-2"></i>
+            My Orders
+          </a>
+
+        {% else %}
+
+          <a
+            href="{% url 'seller-dashboard' %}"
+            class="btn btn-profile"
+          >
+            <i class="bi bi-box-seam me-2"></i>
+            My Products
+          </a>
+
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</section>
+
+{% endblock %}

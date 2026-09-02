@@ -7,10 +7,16 @@ from .models import Cart
 def AddToCartView(request, id):
 
     if not request.user.is_authenticated:
-        messages.error(request, "Please login to add products to cart.")
+        messages.error(
+            request,
+            "Please login to add products to cart."
+        )
         return redirect("login")
 
-    product = get_object_or_404(Product, id=id)
+    product = get_object_or_404(
+        Product,
+        id=id
+    )
 
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
@@ -18,15 +24,33 @@ def AddToCartView(request, id):
     )
 
     if not created:
-        cart_item.quantity += 1
-        cart_item.save()
+
+        if cart_item.quantity < product.stock:
+
+            cart_item.quantity += 1
+            cart_item.save()
+
+        else:
+
+            messages.error(
+                request,
+                "You cannot add more than the available stock."
+            )
+
+            return redirect(
+                "product-detail",
+                id=product.id
+            )
 
     messages.success(
         request,
         f"{product.name} added to your cart."
     )
 
-    return redirect("product-detail", id=product.id)
+    return redirect(
+        "product-detail",
+        id=product.id
+    )
 
 
 def CartView(request):
@@ -64,8 +88,17 @@ def IncreaseQuantityView(request, id):
         user=request.user
     )
 
-    cart_item.quantity += 1
-    cart_item.save()
+    if cart_item.quantity < cart_item.product.stock:
+
+        cart_item.quantity += 1
+        cart_item.save()
+
+    else:
+
+        messages.error(
+            request,
+            "You cannot add more than the available stock."
+        )
 
     return redirect("cart")
 

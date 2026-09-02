@@ -1,293 +1,377 @@
 {% load static %}
 
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>KalaKart</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<title>{% block title %}KalaKart{% endblock %}</title>
 
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<!-- Bootstrap Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+/>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+
   </head>
 
   <body>
-    <!-- Navbar -->
-
-    <nav class="navbar navbar-expand-lg shadow-sm">
-      <div class="container">
-
-        <!-- Logo -->
-
-        <a class="navbar-brand d-flex align-items-center" href="/">
-          <img
-            src="{% static 'images/logo.png' %}"
-            alt="Logo"
-            height="45"
-          />
-
-          <span class="logo-text ms-2">
-            KalaKart
-          </span>
-        </a>
+    <!--Navbar--> 
 
 
-        <!-- Mobile Menu Button -->
+<nav class="navbar navbar-expand-lg shadow-sm">
+  <div class="container">
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Logo -->
 
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+      <img
+        src="{% static 'images/logo.png' %}"
+        alt="KalaKart Logo"
+        height="45"
+      />
 
-        <!-- Navbar Content -->
-
-        <div
-          class="collapse navbar-collapse"
-          id="navbarContent"
-        >
-
-          <!-- Main Navigation -->
-
-          <ul class="navbar-nav mx-auto">
-
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                Home
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/shop/">
-                Shop
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                About
-              </a>
-            </li>
-
-          </ul>
+      <span class="logo-text ms-2">
+        KalaKart
+      </span>
+    </a>
 
 
-          <!-- Right Side Navbar -->
+    <!-- Mobile Menu Button -->
 
-          <div class="d-flex align-items-center gap-2">
-
-
-            <!-- Search -->
-
-            <div class="search-box">
-
-              <form action="" method="GET">
-
-                <input
-                  type="search"
-                  class="form-control search-input"
-                  placeholder="Search products..."
-                  name="q"
-                />
-
-                <button
-                  type="submit"
-                  class="search-btn"
-                >
-                  <i class="bi bi-search"></i>
-                </button>
-
-              </form>
-
-            </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
 
-            <!-- Cart -->
+    <!-- Navbar Content -->
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- Main Navigation -->
+
+      <ul class="navbar-nav mx-auto">
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'home' %}"
+          >
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'shop' %}"
+          >
+            Shop
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'about' %}"
+          >
+            About
+          </a>
+        </li>
+
+      </ul>
+
+
+      <!-- Right Side Navbar -->
+
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <form action="{% url 'shop' %}" method="GET">
+
+            <input
+              type="search"
+              class="form-control search-input"
+              placeholder="Search products..."
+              name="q"
+            />
+
+            <button
+              type="submit"
+              class="search-btn"
+              aria-label="Search"
+            >
+              <i class="bi bi-search"></i>
+            </button>
+
+          </form>
+
+        </div>
+
+
+         <!--Logged In User -->
+        {% if user.is_authenticated %}
+
+
+          <!-- Customer Cart -->
+
+          {% if user.user_type == "customer" %}
 
             <a
               href="{% url 'cart' %}"
               class="btn btn-cart"
+              aria-label="Shopping Cart"
             >
-
               <i class="bi bi-cart3"></i>
 
               <span class="cart-count">
                 0
               </span>
-
             </a>
 
-
-            {% if user.is_authenticated %}
-
-
-            <!-- Seller Dashboard and Orders -->
-
-{% if user.user_type == "seller" %}
-
-<a
-  href="{% url 'seller-dashboard' %}"
-  class="btn btn-login"
->
-  Dashboard
-</a>
-
-<a
-  href="{% url 'seller-orders' %}"
-  class="btn btn-login"
->
-  Orders
-</a>
-
-{% endif %}
+          {% endif %}
 
 
-              <!-- My Orders -->
+          <!-- Seller Navigation -->
 
-              <a
-                href="{% url 'my-orders' %}"
-                class="btn btn-login"
-              >
-                My Orders
-              </a>
+          {% if user.user_type == "seller" %}
+
+            <a
+              href="{% url 'seller-dashboard' %}"
+              class="btn btn-login"
+            >
+              Dashboard
+            </a>
+
+            <a
+              href="{% url 'seller-orders' %}"
+              class="btn btn-login"
+            >
+              Orders
+            </a>
+
+          {% endif %}
 
 
-              <!-- Welcome Message -->
+          <!-- Profile Dropdown -->
 
-              <span class="me-2 fw-semibold">
-                Welcome, {{ user.first_name }}
-              </span>
+          <div class="dropdown">
+
+            <button
+              class="profile-icon"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-label="Profile Menu"
+            >
+              <i class="bi bi-person-circle"></i>
+            </button>
+
+
+            <ul class="dropdown-menu dropdown-menu-end">
+
+
+              <!-- My Profile -->
+
+              <li>
+
+                <a
+                  class="dropdown-item"
+                  href="{% url 'profile' %}"
+                >
+                  <i class="bi bi-person me-2"></i>
+                  My Profile
+                </a>
+
+              </li>
+
+
+              <!-- Seller Menu -->
+
+              {% if user.user_type == "seller" %}
+
+                <li>
+
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'seller-dashboard' %}"
+                  >
+                    <i class="bi bi-box-seam me-2"></i>
+                    My Products
+                  </a>
+
+                </li>
+
+              {% else %}
+
+                <!-- Customer Menu -->
+
+                <li>
+
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'my-orders' %}"
+                  >
+                    <i class="bi bi-bag me-2"></i>
+                    My Orders
+                  </a>
+
+                </li>
+
+              {% endif %}
+
+
+              <!-- Divider -->
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
 
 
               <!-- Logout -->
 
-              <a
-                href="{% url 'logout' %}"
-                class="btn btn-danger"
-              >
-                Logout
-              </a>
+              <li>
 
+                <a
+                  class="dropdown-item text-danger"
+                  href="{% url 'logout' %}"
+                >
+                  <i class="bi bi-box-arrow-right me-2"></i>
+                  Logout
+                </a>
 
-            {% else %}
+              </li>
 
-
-              <!-- Login -->
-
-              <a
-                href="{% url 'login' %}"
-                class="btn btn-login"
-              >
-                Login
-              </a>
-
-
-              <!-- Register -->
-
-              <a
-                href="{% url 'register' %}"
-                class="btn btn-register"
-              >
-                Register
-              </a>
-
-
-            {% endif %}
+            </ul>
 
           </div>
 
-        </div>
+
+        <!--Guest User --> 
+
+        {% else %}
+
+
+          <!-- Login -->
+
+          <a
+            href="{% url 'login' %}"
+            class="btn btn-login"
+          >
+            Login
+          </a>
+
+
+          <!-- Register -->
+
+          <a
+            href="{% url 'register' %}"
+            class="btn btn-register"
+          >
+            Register
+          </a>
+
+
+        {% endif %}
 
       </div>
-    </nav>
+
+    </div>
+
+  </div>
+</nav>
 
 
-    <!-- Django Messages -->
+<!--  Django Messages  -->
 
-    {% if messages %}
+{% if messages %}
 
-    <div class="container mt-3">
+  <div class="container mt-3">
 
-      {% for message in messages %}
+    {% for message in messages %}
 
       <div class="alert alert-{{ message.tags }}">
         {{ message }}
       </div>
 
-      {% endfor %}
+    {% endfor %}
 
-    </div>
+  </div>
 
-    {% endif %}
-
-
-    <!-- Page Content -->
-
-    <div class="container mt-5">
-
-      {% block content %}
-
-      {% endblock %}
-
-    </div>
+{% endif %}
 
 
-    <!-- Bootstrap JS -->
+<!--  Page Content  -->
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+<main class="container mt-5">
 
+  {% block content %}
 
-    <!-- Show / Hide Password -->
+  {% endblock %}
 
-    <script>
-
-      function togglePassword(inputId, button) {
-
-        const input = document.getElementById(inputId);
-
-        const icon = button.querySelector("i");
+</main>
 
 
-        if (input.type === "password") {
+<!--  Bootstrap JS  -->
 
-          input.type = "text";
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
 
-          icon.classList.remove("bi-eye");
 
-          icon.classList.add("bi-eye-slash");
+<!--  Show / Hide Password  -->
 
-        } else {
+<script>
 
-          input.type = "password";
+  function togglePassword(inputId, button) {
 
-          icon.classList.remove("bi-eye-slash");
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector("i");
 
-          icon.classList.add("bi-eye");
+    if (input.type === "password") {
 
-        }
+      input.type = "text";
 
-      }
+      icon.classList.remove("bi-eye");
+      icon.classList.add("bi-eye-slash");
 
-    </script>
+    } else {
+
+      input.type = "password";
+
+      icon.classList.remove("bi-eye-slash");
+      icon.classList.add("bi-eye");
+
+    }
+
+  }
+
+</script>
+
 
   </body>
 </html>

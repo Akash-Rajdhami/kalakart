@@ -1,80 +1,56 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <section class="product-detail-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4">
+        {% if product.image %}
 
-    <div class="container">
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="img-fluid product-detail-image"
+        />
 
-        <div class="row align-items-center">
+        {% else %}
 
-            <div class="col-lg-6 mb-4">
+        <img
+          src="https://via.placeholder.com/600x500"
+          alt="No Image"
+          class="img-fluid product-detail-image"
+        />
 
-                {% if product.image %}
+        {% endif %}
+      </div>
 
-                <img
-                    src="{{ product.image.url }}"
-                    alt="{{ product.name }}"
-                    class="img-fluid product-detail-image"
-                >
+      <div class="col-lg-6">
+        <h2 class="product-title">{{ product.name }}</h2>
 
-                {% else %}
+        <p class="product-category">
+          <strong>Category:</strong>
+          {{ product.category }}
+        </p>
 
-                <img
-                    src="https://via.placeholder.com/600x500"
-                    alt="No Image"
-                    class="img-fluid product-detail-image"
-                >
+        <h3 class="product-price">Rs. {{ product.price }}</h3>
 
-                {% endif %}
+        <p class="product-description">{{ product.description }}</p>
 
-            </div>
+        <div class="product-features">
+          <p><strong>Stock:</strong> {{ product.stock }}</p>
 
-            <div class="col-lg-6">
-
-                <h2 class="product-title">
-                    {{ product.name }}
-                </h2>
-
-                <p class="product-category">
-                    <strong>Category:</strong>
-                    {{ product.category }}
-                </p>
-
-                <h3 class="product-price">
-                    Rs. {{ product.price }}
-                </h3>
-
-                <p class="product-description">
-                    {{ product.description }}
-                </p>
-
-                <div class="product-features">
-
-                    <p><strong>Stock:</strong> {{ product.stock }}</p>
-
-                    <p><strong>Seller:</strong> {{ product.seller.username }}</p>
-
-                </div>
-
-                <div class="product-buttons">
-
-                    <a href="#" class="btn-cart">
-                        Add to Cart
-                    </a>
-
-                    <a href="{% url 'shop' %}" class="btn-back">
-                        Back to Shop
-                    </a>
-
-                </div>
-
-            </div>
-
+          <p><strong>Seller:</strong> {{ product.seller.username }}</p>
         </div>
 
-    </div>
+        <div class="product-buttons">
+          <a href="{% url 'add-to-cart' product.id %}" class="btn-cart">
+            Add to Cart
+          </a>
 
+          <a href="{% url 'shop' %}" class="btn-back"> Back to Shop </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% endblock %}

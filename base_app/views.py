@@ -140,3 +140,8 @@ def SellerDashboardView(request):
         return redirect("home")
 
     return render(request, "seller_dashboard.html")
+
+@login_required
+def ProfileView(request):
+
+    return render(request, "profile.html")
