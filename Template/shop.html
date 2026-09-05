@@ -117,7 +117,21 @@
                 <div class="col-12 text-center">
 
                     <div class="alert alert-info">
-                        No products are available in this category.
+
+                        {% if search_query %}
+
+                            No products found for "{{ search_query }}".
+
+                        {% elif selected_category %}
+
+                            No products are available in this category.
+
+                        {% else %}
+
+                            No products are available at the moment.
+
+                        {% endif %}
+
                     </div>
 
                 </div>
