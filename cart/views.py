@@ -15,31 +15,49 @@ def AddToCartView(request, id):
         messages.error(request, "This product is out of stock.")
         return redirect("product-detail", id=product.id)
 
+    quantity = int(request.POST.get("quantity", 1))
+
+    if quantity < 1:
+        messages.error(request, "Invalid quantity.")
+        return redirect("product-detail", id=product.id)
+
+    if quantity > product.stock:
+        messages.error(
+            request,
+            "You cannot add more than the available stock."
+        )
+        return redirect("product-detail", id=product.id)
+
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
         product=product
     )
 
-    if not created:
+    if created:
 
-        if cart_item.quantity < product.stock:
-            cart_item.quantity += 1
-            cart_item.save()
+        cart_item.quantity = quantity
+        cart_item.save()
 
-        else:
+    else:
+
+        new_quantity = cart_item.quantity + quantity
+
+        if new_quantity > product.stock:
             messages.error(
                 request,
                 "You cannot add more than the available stock."
             )
             return redirect("product-detail", id=product.id)
 
+        cart_item.quantity = new_quantity
+        cart_item.save()
+
     messages.success(
         request,
-        f"{product.name} added to your cart."
+        f"{quantity} × {product.name} added to your cart."
     )
 
     return redirect("product-detail", id=product.id)
-
 
 @login_required
 def CartView(request):
