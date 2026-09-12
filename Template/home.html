@@ -1,338 +1,627 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% load static %} 
+{% load static %}
 
 {% block content %}
 
+<!-- ==================== HERO SECTION ==================== -->
+
 <section class="hero-section">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <h1 class="hero-title">KalaKart</h1>
 
-        <h4 class="hero-slogan">Crafted with Culture</h4>
+    <div class="container">
 
-        <p class="hero-description">
-          Discover unique handmade and cultural products created by talented
-          artists. Explore authentic craftsmanship and bring meaningful
-          creations into your home.
-        </p>
+        <div class="row align-items-center">
 
-        <div class="hero-buttons">
-          <a href="/shop/" class="btn-shop"> Shop Now </a>
+            <div class="col-lg-6">
 
-          <a href="/about/" class="btn-learn"> Learn More </a>
+                <h1 class="hero-title">
+                    KalaKart
+                </h1>
+
+                <h4 class="hero-slogan">
+                    Crafted with Culture
+                </h4>
+
+                <p class="hero-description">
+                    Discover unique handmade and cultural products created by
+                    talented artists. Explore authentic craftsmanship and bring
+                    meaningful creations into your home.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="{% url 'shop' %}"
+                        class="btn-shop"
+                    >
+                        Shop Now
+                    </a>
+
+                    <a
+                        href="{% url 'about' %}"
+                        class="btn-learn"
+                    >
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="{% static 'images/hero.png' %}"
+                    alt="KalaKart Products"
+                    class="img-fluid hero-image"
+                >
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="col-lg-6 text-center">
-        <img
-          src="{% static 'images/hero.png' %}"
-          alt="KalaKart Products"
-          class="img-fluid hero-image"
-        />
-      </div>
     </div>
-  </div>
+
 </section>
 
-{% comment %} Featured-Categories {% endcomment %}
+
+<!-- ==================== FEATURED CATEGORIES ==================== -->
 
 <section class="categories-section">
-  <div class="container">
-    <h2 class="section-title text-center">Featured Categories</h2>
 
-    <p class="section-subtitle text-center">
-      Explore our collection of handmade and cultural products.
-    </p>
+    <div class="container">
 
-    <div class="row mt-5">
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img
-            src="{% static 'images/handicraft.jpg' %}"
-            class="category-image"
-          />
+        <h2 class="section-title text-center">
+            Featured Categories
+        </h2>
 
-          <h4>Handicrafts</h4>
+        <p class="section-subtitle text-center">
+            Explore our collection of handmade and cultural products.
+        </p>
 
-          <p>Beautiful handmade items crafted with skill and tradition.</p>
 
-          <a href="/shop/" class="btn-category"> View Products </a>
+        <div class="row mt-5">
+
+
+            <!-- Handicrafts -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/handicraft.jpg' %}"
+                        class="category-image"
+                        alt="Handicrafts"
+                    >
+
+                    <h4>
+                        Handicrafts
+                    </h4>
+
+                    <p>
+                        Beautiful handmade items crafted with skill and tradition.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=handicrafts"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Paintings -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/painting.jpg' %}"
+                        class="category-image"
+                        alt="Paintings"
+                    >
+
+                    <h4>
+                        Paintings
+                    </h4>
+
+                    <p>
+                        Unique artworks that add creativity and culture to your space.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=paintings"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Pottery -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/pottery.jpg' %}"
+                        class="category-image"
+                        alt="Pottery"
+                    >
+
+                    <h4>
+                        Pottery
+                    </h4>
+
+                    <p>
+                        Traditional and modern clay creations made by talented artists.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=pottery"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Traditional Wear -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/traditional-wear.jpg' %}"
+                        class="category-image"
+                        alt="Traditional Wear"
+                    >
+
+                    <h4>
+                        Traditional Wear
+                    </h4>
+
+                    <p>
+                        Authentic clothing inspired by local culture and heritage.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=traditional_wears"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Home Decor -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/home-decor.jpg' %}"
+                        class="category-image"
+                        alt="Home Decor"
+                    >
+
+                    <h4>
+                        Home Decor
+                    </h4>
+
+                    <p>
+                        Handmade decorative pieces for a warm and beautiful home.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=home_decor"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Jewelry -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="category-card">
+
+                    <img
+                        src="{% static 'images/jewelry.jpg' %}"
+                        class="category-image"
+                        alt="Jewelry"
+                    >
+
+                    <h4>
+                        Jewelry
+                    </h4>
+
+                    <p>
+                        Elegant handmade accessories designed for every occasion.
+                    </p>
+
+                    <a
+                        href="{% url 'shop' %}?category=jewellery"
+                        class="btn-category"
+                    >
+                        View Products
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img
-            src="{% static 'images/painting.jpg' %}"
-            class="category-image"
-          />
-
-          <h4>Paintings</h4>
-
-          <p>Unique artworks that add creativity and culture to your space.</p>
-
-          <a href="/shop/" class="btn-category"> View Products </a>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img src="{% static 'images/pottery.jpg' %}" class="category-image" />
-
-          <h4>Pottery</h4>
-
-          <p>Traditional and modern clay creations made by talented artists.</p>
-
-          <a href="/shop/" class="btn-category"> View Products </a>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img
-            src="{% static 'images/traditional-wear.jpg' %}"
-            class="category-image"
-          />
-
-          <h4>Traditional Wear</h4>
-
-          <p>Authentic clothing inspired by local culture and heritage.</p>
-
-          <a href="/shop/" class="btn-category"> View Products </a>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img
-            src="{% static 'images/home-decor.jpg' %}"
-            class="category-image"
-          />
-
-          <h4>Home Decor</h4>
-
-          <p>Handmade decorative pieces for a warm and beautiful home.</p>
-
-          <a href="/shop/" class="btn-category"> View Products </a>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="category-card">
-          <img src="{% static 'images/jewelry.jpg' %}" class="category-image" />
-
-          <h4>Jewelry</h4>
-
-          <p>Elegant handmade accessories designed for every occasion.</p>
-
-          <a href="/shop/" class="btn-category"> View Products </a>
-        </div>
-      </div>
     </div>
-  </div>
+
 </section>
 
-{% comment %} why section {% endcomment %}
+
+<!-- ==================== WHY CHOOSE KALAKART ==================== -->
 
 <section class="why-section">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Why Choose KalaKart</h2>
 
-      <p class="section-subtitle">
-        Experience authentic handmade products while supporting local artists
-        and culture.
-      </p>
-    </div>
+    <div class="container">
 
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="why-card">
-          <div class="why-icon">
-            <i class="bi bi-palette"></i>
-          </div>
+        <div class="text-center mb-5">
 
-          <h4>Handmade Products</h4>
+            <h2 class="section-title">
+                Why Choose KalaKart
+            </h2>
 
-          <p>
-            Discover carefully crafted handmade items created with creativity
-            and passion.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-4">
-        <div class="why-card">
-          <div class="why-icon">
-            <i class="bi bi-people"></i>
-          </div>
-
-          <h4>Support Local Artists</h4>
-
-          <p>
-            Every purchase helps talented local creators grow and share their
-            craftsmanship.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-4">
-        <div class="why-card">
-          <div class="why-icon">
-            <i class="bi bi-shield-lock"></i>
-          </div>
-
-          <h4>Secure Shopping</h4>
-
-          <p>
-            Enjoy a smooth and secure shopping experience with trusted payment
-            methods.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-3 mb-4">
-        <div class="why-card">
-          <div class="why-icon">
-            <i class="bi bi-credit-card"></i>
-          </div>
-
-          <h4>Flexible Payment</h4>
-
-          <p>
-            Pay easily using Khalti or Cash on Delivery according to your
-            preference.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% comment %} Featured Products {% endcomment %}
-
-<section class="products-section">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Featured Products</h2>
-
-      <p class="section-subtitle">
-        Explore some of our popular handmade and cultural products.
-      </p>
-    </div>
-
-    <div class="row">
-      {% for product in featured_products %}
-      <div class="col-md-3 mb-4">
-        <div class="product-card">
-
-          {% if product.image %}
-          <img
-            src="{{ product.image.url }}"
-            class="product-image"
-            alt="{{ product.name }}"
-          />
-          {% endif %}
-
-          <div class="product-content">
-            <h4>{{ product.name }}</h4>
-
-            <p class="product-price">
-              Rs. {{ product.price }}
+            <p class="section-subtitle">
+                Experience authentic handmade products while supporting
+                local artists and culture.
             </p>
 
-            <a
-              href="{% url 'product-detail' product.id %}"
-              class="btn-product"
-            >
-              View Product
-            </a>
-          </div>
+        </div>
+
+
+        <div class="row">
+
+
+            <!-- Handmade Products -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-palette"></i>
+                    </div>
+
+                    <h4>
+                        Handmade Products
+                    </h4>
+
+                    <p>
+                        Discover carefully crafted handmade items created
+                        with creativity and passion.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Support Local Artists -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h4>
+                        Support Local Artists
+                    </h4>
+
+                    <p>
+                        Every purchase helps talented local creators grow
+                        and share their craftsmanship.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Secure Shopping -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+
+                    <h4>
+                        Secure Shopping
+                    </h4>
+
+                    <p>
+                        Enjoy a smooth and secure shopping experience with
+                        trusted payment methods.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Flexible Payment -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+
+                    <h4>
+                        Flexible Payment
+                    </h4>
+
+                    <p>
+                        Pay easily using Khalti or Cash on Delivery according
+                        to your preference.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
-      </div>
 
-      {% empty %}
-      <div class="col-12 text-center">
-        <p class="text-muted">
-          No featured products available yet.
-        </p>
-      </div>
-      {% endfor %}
     </div>
-  </div>
+
 </section>
 
-{% comment %} Seller CTA Section {% endcomment %} {% comment %} Seller CTA
-Section {% endcomment %}
+
+<!-- ==================== FEATURED PRODUCTS ==================== -->
+
+<section class="products-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Featured Products
+            </h2>
+
+            <p class="section-subtitle">
+                Explore some of our latest handmade and cultural products.
+            </p>
+
+        </div>
+
+
+        <div class="row">
+
+            {% for product in featured_products %}
+
+                <div class="col-lg-3 col-md-6 mb-4">
+
+                    <div class="product-card">
+
+
+                        <!-- Product Image -->
+
+                        {% if product.image %}
+
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                                class="product-image"
+                            >
+
+                        {% else %}
+
+                            <div
+                                class="product-image d-flex align-items-center justify-content-center bg-light"
+                            >
+
+                                <span class="text-muted">
+                                    No image available
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- Product Information -->
+
+                        <div class="product-content">
+
+                            <h4>
+                                {{ product.name }}
+                            </h4>
+
+                            <p class="product-price">
+                                Rs. {{ product.price }}
+                            </p>
+
+                            <a
+                                href="{% url 'product-detail' product.id %}"
+                                class="btn-product"
+                            >
+                                View Product
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12 text-center">
+
+                    <p class="text-muted">
+                        No featured products available yet.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== SELLER CTA ==================== -->
 
 <section class="seller-section">
-  <div class="container">
-    <div class="seller-box text-center">
-      <h2 class="seller-title">Become a Seller on KalaKart</h2>
 
-      <p class="seller-description">
-        Share your handmade creations with customers across Nepal and grow your
-        artistic business with KalaKart.
-      </p>
+    <div class="container">
 
-      {% comment %} {% comment %}
-      <a href="{% url 'seller-register' %}" class="seller-btn">
-        Start Selling
-      </a>
-      {% endcomment %}
+        <div class="seller-box text-center">
+
+            <h2 class="seller-title">
+                Become a Seller on KalaKart
+            </h2>
+
+            <p class="seller-description">
+                Share your handmade creations with customers across Nepal
+                and grow your artistic business with KalaKart.
+            </p>
+
+        </div>
+
     </div>
-  </div>
+
 </section>
 
-{% comment %} Footer Section {% endcomment %}
+
+<!-- ==================== FOOTER ==================== -->
 
 <footer class="footer-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <h3 class="footer-logo">KalaKart</h3>
 
-        <p class="footer-text">
-          KalaKart is a handmade and cultural ecommerce platform that supports
-          local artists and promotes authentic craftsmanship.
-        </p>
-      </div>
+    <div class="container">
 
-      <div class="col-lg-4 mb-4">
-        <h4 class="footer-heading">Quick Links</h4>
+        <div class="row">
 
-        <ul class="footer-links">
-          <li>
-            <a href="/"> Home </a>
-          </li>
 
-          <li>
-            <a href="/shop/"> Shop </a>
-          </li>
+            <!-- About -->
 
-          <li>
-            <a href="/about/"> About </a>
-          </li>
-        </ul>
-      </div>
+            <div class="col-lg-4 mb-4">
 
-      <div class="col-lg-4 mb-4">
-        <h4 class="footer-heading">Contact</h4>
+                <h3 class="footer-logo">
+                    KalaKart
+                </h3>
 
-        <p class="footer-text">Email: support@kalakart.com</p>
-        <p class="footer-text">Phone No: +977 9800000000</p>
-        <p class="footer-text">Location: Nepal</p>
-      </div>
+                <p class="footer-text">
+                    KalaKart is a handmade and cultural ecommerce platform
+                    that supports local artists and promotes authentic
+                    craftsmanship.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+
+            <div class="col-lg-4 mb-4">
+
+                <h4 class="footer-heading">
+                    Quick Links
+                </h4>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="{% url 'home' %}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'shop' %}">
+                            Shop
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Contact -->
+
+            <div class="col-lg-4 mb-4">
+
+                <h4 class="footer-heading">
+                    Contact
+                </h4>
+
+                <p class="footer-text">
+                    Email: support@kalakart.com
+                </p>
+
+                <p class="footer-text">
+                    Phone No: +977 9800000000
+                </p>
+
+                <p class="footer-text">
+                    Location: Nepal
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom text-center">
+
+            <p>
+                © 2026 KalaKart. All Rights Reserved.
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="footer-bottom text-center">
-      <p>© 2026 KalaKart. All Rights Reserved.</p>
-    </div>
-  </div>
 </footer>
 
 {% endblock %}
-
