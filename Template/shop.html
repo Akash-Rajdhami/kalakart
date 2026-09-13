@@ -19,6 +19,8 @@
 </section>
 
 
+<!-- ==================== CATEGORIES ==================== -->
+
 <section class="shop-categories">
 
     <div class="container">
@@ -31,6 +33,7 @@
             >
                 All
             </a>
+
 
             {% for value, label in categories %}
 
@@ -50,9 +53,105 @@
 </section>
 
 
+<!-- ==================== SEARCH & SORT ==================== -->
+
 <section class="shop-products">
 
     <div class="container">
+
+        <form
+            method="GET"
+            class="shop-filter-form mb-5"
+        >
+
+            {% if selected_category %}
+
+                <input
+                    type="hidden"
+                    name="category"
+                    value="{{ selected_category }}"
+                >
+
+            {% endif %}
+
+
+            <div class="row g-3 align-items-center">
+
+
+                <!-- Search -->
+
+                <div class="col-md-7">
+
+                    <input
+                        type="search"
+                        name="q"
+                        value="{{ search_query|default:'' }}"
+                        class="form-control"
+                        placeholder="Search products..."
+                    >
+
+                </div>
+
+
+                <!-- Sort -->
+
+                <div class="col-md-3">
+
+                    <select
+                        name="sort"
+                        class="form-select"
+                        onchange="this.form.submit()"
+                    >
+
+                        <option value="">
+                            Sort By
+                        </option>
+
+                        <option
+                            value="newest"
+                            {% if selected_sort == "newest" %}selected{% endif %}
+                        >
+                            Newest
+                        </option>
+
+                        <option
+                            value="price_low"
+                            {% if selected_sort == "price_low" %}selected{% endif %}
+                        >
+                            Price: Low to High
+                        </option>
+
+                        <option
+                            value="price_high"
+                            {% if selected_sort == "price_high" %}selected{% endif %}
+                        >
+                            Price: High to Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Search Button -->
+
+                <div class="col-md-2">
+
+                    <button
+                        type="submit"
+                        class="shop-btn w-100"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <!-- ==================== PRODUCTS ==================== -->
 
         <div class="row">
 
@@ -60,59 +159,78 @@
 
                 {% for product in products %}
 
-                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-4">
 
-                    <div class="shop-card">
-
-                        {% if product.image %}
-
-                            <img
-                                src="{{ product.image.url }}"
-                                alt="{{ product.name }}"
-                                class="shop-image"
-                            >
-
-                        {% else %}
-
-                            <p>No image available</p>
-
-                        {% endif %}
+                        <div class="shop-card">
 
 
-                        <div class="shop-content">
+                            <!-- Product Image -->
 
-                            <span class="shop-category">
-                                {{ product.category }}
-                            </span>
+                            {% if product.image %}
 
-                            <h4 class="product-name">
-                                {{ product.name }}
-                            </h4>
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    class="shop-image"
+                                >
 
-                            <p class="shop-description-card">
-                                {{ product.description|truncatewords:15 }}
-                            </p>
+                            {% else %}
 
-                            <p class="shop-price">
-                                Rs. {{ product.price }}
-                            </p>
+                                <div class="shop-image d-flex align-items-center justify-content-center bg-light">
 
-                            <a
-                                href="{% url 'product-detail' product.id %}"
-                                class="shop-btn"
-                            >
-                                View Details
-                            </a>
+                                    <span class="text-muted">
+                                        No image available
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- Product Information -->
+
+                            <div class="shop-content">
+
+                                <span class="shop-category">
+                                    {{ product.get_category_display }}
+                                </span>
+
+
+                                <h4 class="product-name">
+                                    {{ product.name }}
+                                </h4>
+
+
+                                <p class="shop-description-card">
+                                    {{ product.description|truncatewords:15 }}
+                                </p>
+
+
+                                <p class="shop-price">
+                                    Rs. {{ product.price }}
+                                </p>
+
+
+                                <a
+                                    href="{% url 'product-detail' product.id %}"
+                                    class="shop-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
-
                 {% endfor %}
 
+
             {% else %}
+
+
+                <!-- No Products -->
 
                 <div class="col-12 text-center">
 
@@ -135,6 +253,7 @@
                     </div>
 
                 </div>
+
 
             {% endif %}
 
