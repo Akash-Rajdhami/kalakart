@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from accounts.models import CustomUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
-from accounts.models import CustomUser
 from products.models import Product
-from orders.models import Order
 
 
 def HomeView(request):
@@ -29,29 +27,67 @@ def ShopView(request):
 
     category = request.GET.get("category")
     search_query = request.GET.get("q")
+    selected_sort = request.GET.get("sort")
 
     products = Product.objects.all()
 
+
     # Search products
+
     if search_query:
+
         products = products.filter(
             name__icontains=search_query
         )
 
+
     # Category filter
+
     if category:
+
         products = products.filter(
             category=category
         )
 
+
+    # Sorting
+
+    if selected_sort == "newest":
+
+        products = products.order_by(
+            "-created_at"
+        )
+
+    elif selected_sort == "price_low":
+
+        products = products.order_by(
+            "price"
+        )
+
+    elif selected_sort == "price_high":
+
+        products = products.order_by(
+            "-price"
+        )
+
+    else:
+
+        products = products.order_by(
+            "-created_at"
+        )
+
+
     categories = Product.CATEGORY_CHOICES
+
 
     context = {
         "products": products,
         "categories": categories,
         "selected_category": category,
         "search_query": search_query,
+        "selected_sort": selected_sort,
     }
+
 
     return render(
         request,
@@ -97,7 +133,7 @@ def RegisterView(request):
         password2 = request.POST.get("password2")
         user_type = request.POST.get("user_type")
 
-        # Password match
+
         if password1 != password2:
 
             messages.error(
@@ -107,7 +143,7 @@ def RegisterView(request):
 
             return redirect("register")
 
-        # Username already exists
+
         if CustomUser.objects.filter(
             username=username
         ).exists():
@@ -119,7 +155,7 @@ def RegisterView(request):
 
             return redirect("register")
 
-        # Email already exists
+
         if CustomUser.objects.filter(
             email=email
         ).exists():
@@ -131,7 +167,7 @@ def RegisterView(request):
 
             return redirect("register")
 
-        # Create user
+
         CustomUser.objects.create_user(
             username=username,
             email=email,
@@ -140,12 +176,14 @@ def RegisterView(request):
             user_type=user_type,
         )
 
+
         messages.success(
             request,
             "Account created successfully!"
         )
 
         return redirect("login")
+
 
     return render(
         request,
@@ -160,11 +198,13 @@ def LoginView(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
+
         user = authenticate(
             request,
             username=username,
             password=password
         )
+
 
         if user is not None:
 
@@ -180,14 +220,14 @@ def LoginView(request):
 
             return redirect("home")
 
-        else:
 
-            messages.error(
-                request,
-                "Invalid Username or Password."
-            )
+        messages.error(
+            request,
+            "Invalid Username or Password."
+        )
 
-            return redirect("login")
+        return redirect("login")
+
 
     return render(
         request,
@@ -210,7 +250,6 @@ def LogoutView(request):
 @login_required
 def SellerDashboardView(request):
 
-    # Only sellers can access the dashboard
     if request.user.user_type != "seller":
 
         messages.error(
@@ -220,37 +259,10 @@ def SellerDashboardView(request):
 
         return redirect("home")
 
-    # Get products belonging to this seller
-    products = Product.objects.filter(
-        seller=request.user
-    ).order_by("-created_at")
-
-    # Get orders for this seller's products
-    orders = Order.objects.filter(
-        product__seller=request.user
-    )
-
-    # Total number of orders
-    total_orders = orders.count()
-
-    # Calculate revenue
-    # Cancelled orders are not included.
-    total_revenue = sum(
-        order.total_price
-        for order in orders
-        if order.status != "cancelled"
-    )
-
-    context = {
-        "products": products,
-        "total_orders": total_orders,
-        "total_revenue": total_revenue,
-    }
 
     return render(
         request,
-        "seller/dashboard.html",
-        context
+        "seller/dashboard.html"
     )
 
 
@@ -279,13 +291,16 @@ def ProfileView(request):
             "address"
         )
 
+
         if request.FILES.get("profile_image"):
 
             request.user.profile_image = request.FILES.get(
                 "profile_image"
             )
 
+
         request.user.save()
+
 
         messages.success(
             request,
@@ -293,6 +308,7 @@ def ProfileView(request):
         )
 
         return redirect("profile")
+
 
     return render(
         request,
