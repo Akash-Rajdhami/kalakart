@@ -4,128 +4,239 @@
 
 <section class="product-detail-section">
 
-  <div class="container">
+    <div class="container">
+
+        <div class="row align-items-center">
 
 
-<div class="row align-items-center">
+            <!-- Product Image -->
 
-  <div class="col-lg-6 mb-4">
+            <div class="col-lg-6 mb-4">
 
-    {% if product.image %}
+                {% if product.image %}
 
-    <img
-      src="{{ product.image.url }}"
-      alt="{{ product.name }}"
-      class="img-fluid product-detail-image"
-    />
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="img-fluid product-detail-image"
+                    >
 
-    {% else %}
+                {% else %}
 
-    <img
-      src="https://via.placeholder.com/600x500"
-      alt="No Image"
-      class="img-fluid product-detail-image"
-    />
+                    <div class="product-detail-image d-flex align-items-center justify-content-center bg-light">
 
-    {% endif %}
+                        <span class="text-muted">
+                            No image available
+                        </span>
 
-  </div>
+                    </div>
 
+                {% endif %}
 
-  <div class="col-lg-6">
-
-    <h2 class="product-title">
-      {{ product.name }}
-    </h2>
-
-    <p class="product-category">
-
-      <strong>Category:</strong>
-
-      {{ product.category }}
-
-    </p>
+            </div>
 
 
-    <h3 class="product-price">
-      Rs. {{ product.price }}
-    </h3>
+            <!-- Product Information -->
+
+            <div class="col-lg-6">
+
+                <h2 class="product-title">
+                    {{ product.name }}
+                </h2>
 
 
-    <p class="product-description">
-      {{ product.description }}
-    </p>
+                <p class="product-category">
+
+                    <strong>Category:</strong>
+
+                    {{ product.get_category_display }}
+
+                </p>
 
 
-    <div class="product-features">
-
-      <p>
-        <strong>Stock:</strong>
-        {{ product.stock }}
-      </p>
-
-      <p>
-        <strong>Seller:</strong>
-        {{ product.seller.username }}
-      </p>
-
-    </div>
+                <h3 class="product-price">
+                    Rs. {{ product.price }}
+                </h3>
 
 
-    <div class="product-buttons">
+                <p class="product-description">
+                    {{ product.description }}
+                </p>
 
-      <form
-        method="POST"
-        action="{% url 'add-to-cart' product.id %}"
-      >
 
-        {% csrf_token %}
+                <!-- Product Information -->
 
-        <div class="mb-3">
+                <div class="product-features">
 
-          <label for="quantity" class="form-label">
-            Quantity
-          </label>
+                    <p>
 
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value="1"
-            min="1"
-            max="{{ product.stock }}"
-            class="form-control"
-            style="max-width: 120px;"
-          />
+                        <strong>Stock:</strong>
+
+                        {% if product.stock > 0 %}
+
+                            <span>
+                                {{ product.stock }} available
+                            </span>
+
+                        {% else %}
+
+                            <span class="text-danger">
+                                Out of Stock
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Seller:</strong>
+
+                        {{ product.seller.username }}
+
+                    </p>
+
+                </div>
+
+
+                <!-- Add To Cart -->
+
+                {% if product.stock > 0 %}
+
+                    {% if user.is_authenticated %}
+
+                        {% if user.user_type == "customer" %}
+
+                            <div class="product-buttons">
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'add-to-cart' product.id %}"
+                                >
+
+                                    {% csrf_token %}
+
+
+                                    <div class="mb-3">
+
+                                        <label
+                                            for="quantity"
+                                            class="form-label"
+                                        >
+                                            Quantity
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="quantity"
+                                            name="quantity"
+                                            value="1"
+                                            min="1"
+                                            max="{{ product.stock }}"
+                                            class="form-control"
+                                            style="max-width: 120px;"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <button
+                                        type="submit"
+                                        class="btn-cart"
+                                    >
+                                        Add to Cart
+                                    </button>
+
+                                </form>
+
+
+                                <a
+                                    href="{% url 'shop' %}"
+                                    class="btn-back"
+                                >
+                                    Back to Shop
+                                </a>
+
+                            </div>
+
+
+                        {% else %}
+
+                            <div class="alert alert-info">
+
+                                Sellers cannot add products to a cart.
+
+                            </div>
+
+
+                            <a
+                                href="{% url 'shop' %}"
+                                class="btn-back"
+                            >
+                                Back to Shop
+                            </a>
+
+                        {% endif %}
+
+
+                    {% else %}
+
+                        <div class="product-buttons">
+
+                            <a
+                                href="{% url 'login' %}"
+                                class="btn-cart"
+                            >
+                                Login to Add to Cart
+                            </a>
+
+
+                            <a
+                                href="{% url 'shop' %}"
+                                class="btn-back"
+                            >
+                                Back to Shop
+                            </a>
+
+                        </div>
+
+                    {% endif %}
+
+
+                {% else %}
+
+                    <!-- Out of Stock -->
+
+                    <div class="product-buttons">
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            disabled
+                        >
+                            Out of Stock
+                        </button>
+
+
+                        <a
+                            href="{% url 'shop' %}"
+                            class="btn-back"
+                        >
+                            Back to Shop
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
 
         </div>
 
-
-        <button
-          type="submit"
-          class="btn-cart"
-        >
-          Add to Cart
-        </button>
-
-      </form>
-
-
-      <a
-        href="{% url 'shop' %}"
-        class="btn-back"
-      >
-        Back to Shop
-      </a>
-
     </div>
-
-  </div>
-
-</div>
-
-
-  </div>
 
 </section>
 
