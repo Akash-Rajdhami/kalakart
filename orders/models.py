@@ -138,8 +138,6 @@ def UpdateOrderStatusView(request, id):
         old_status = order.status
         product = order.product
 
-        # Pending → Confirmed
-        # Reduce product stock.
         if (
             old_status == "pending"
             and new_status == "confirmed"
@@ -162,8 +160,6 @@ def UpdateOrderStatusView(request, id):
                 order.status = "confirmed"
                 order.save()
 
-        # Confirmed → Cancelled
-        # Restore the previously deducted stock.
         elif (
             old_status == "confirmed"
             and new_status == "cancelled"
@@ -177,8 +173,6 @@ def UpdateOrderStatusView(request, id):
                 order.status = "cancelled"
                 order.save()
 
-        # Delivered and cancelled orders
-        # cannot be changed again.
         elif old_status in [
             "delivered",
             "cancelled"
@@ -191,7 +185,6 @@ def UpdateOrderStatusView(request, id):
 
             return redirect("seller-orders")
 
-        # Other valid status changes.
         else:
 
             order.status = new_status
