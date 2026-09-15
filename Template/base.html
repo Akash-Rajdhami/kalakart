@@ -23,7 +23,25 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
+<script>
+    setTimeout(function () {
 
+        const messages = document.querySelectorAll(".messages-container .alert");
+
+        messages.forEach(function (message) {
+
+            message.style.transition = "opacity 0.5s ease";
+
+            message.style.opacity = "0";
+
+            setTimeout(function () {
+                message.remove();
+            }, 500);
+
+        });
+
+    }, 3000);
+</script>
   <body>
 
     <!-- Navbar -->
@@ -308,21 +326,32 @@
 
     <!-- Django Messages -->
 
-    {% if messages %}
+   {% if messages %}
 
-      <div class="container mt-3">
+    <div class="messages-container">
 
         {% for message in messages %}
 
-          <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-          </div>
+            <div
+                class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                role="alert"
+            >
+                {{ message }}
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+
+            </div>
 
         {% endfor %}
 
-      </div>
+    </div>
 
-    {% endif %}
+{% endif %}
 
 
     <!-- Page Content -->
