@@ -768,9 +768,7 @@ body {
 }
 
 
-/* ===========================
-   Register Page
-=========================== */
+/*  Register Page */
 
 .register-section{
 
@@ -879,9 +877,7 @@ body {
 
 
 
-/* ===========================
-   Login Page
-=========================== */
+/* Login Page */
 
 .login-section{
 
@@ -1291,3 +1287,104 @@ body {
     text-decoration: underline;
 }
 
+.messages-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 300px;
+    z-index: 9999;
+
+    pointer-events: none;
+}
+
+.message-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 300px;
+    min-height: 45px;
+
+    padding: 10px 12px;
+    margin: 0 0 10px 0;
+
+    font-size: 14px;
+    line-height: 1.4;
+
+    border-radius: 6px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+    pointer-events: auto;
+
+    animation: popupMessage 0.4s ease-out;
+}
+
+.message-text {
+    flex: 1;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.message-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    margin-left: 12px;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* Popup animation */
+
+@keyframes popupMessage {
+
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(5px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* Disappear animation */
+
+.message-alert.hide-message {
+    animation: hideMessage 0.5s ease forwards;
+}
+
+@keyframes hideMessage {
+
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+
+}

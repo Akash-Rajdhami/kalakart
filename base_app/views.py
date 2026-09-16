@@ -121,61 +121,82 @@ def ProductDetailView(request, id):
         context
     )
 
-
 def RegisterView(request):
 
     if request.method == "POST":
 
-        first_name = request.POST.get("first_name")
-        email = request.POST.get("email")
-        username = request.POST.get("username")
+        # Get name from the form
+        full_name = (
+            request.POST.get("full_name")
+            or request.POST.get("name")
+            or request.POST.get("first_name")
+            or ""
+        ).strip()
+
+        email = request.POST.get("email", "").strip()
+        username = request.POST.get("username", "").strip()
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
         user_type = request.POST.get("user_type")
 
+        # Validate name
+        if not full_name:
+            messages.error(request, "Please enter your full name.")
+            return redirect("register")
+
+        # Separate first name and last name
+        name_parts = full_name.split()
+
+        first_name = name_parts[0]
+
+        if len(name_parts) > 1:
+            last_name = " ".join(name_parts[1:])
+        else:
+            last_name = ""
+
+        # Validate username
+        if not username:
+            messages.error(request, "Please enter a username.")
+            return redirect("register")
+
+        # Validate email
+        if not email:
+            messages.error(request, "Please enter your email.")
+            return redirect("register")
+
+        # Validate user type
+        if user_type not in ["customer", "seller"]:
+            messages.error(request, "Please select Customer or Seller.")
+            return redirect("register")
+
+        # Validate passwords
+        if not password1 or not password2:
+            messages.error(request, "Please enter both passwords.")
+            return redirect("register")
 
         if password1 != password2:
-
-            messages.error(
-                request,
-                "Passwords do not match."
-            )
-
+            messages.error(request, "Passwords do not match.")
             return redirect("register")
 
-
-        if CustomUser.objects.filter(
-            username=username
-        ).exists():
-
-            messages.error(
-                request,
-                "Username already exists."
-            )
-
+        # Check username
+        if CustomUser.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
             return redirect("register")
 
-
-        if CustomUser.objects.filter(
-            email=email
-        ).exists():
-
-            messages.error(
-                request,
-                "Email already exists."
-            )
-
+        # Check email
+        if CustomUser.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
             return redirect("register")
 
-
+        # Create user
         CustomUser.objects.create_user(
             username=username,
             email=email,
             first_name=first_name,
+            last_name=last_name,
             password=password1,
             user_type=user_type,
         )
-
 
         messages.success(
             request,
@@ -184,12 +205,10 @@ def RegisterView(request):
 
         return redirect("login")
 
-
     return render(
         request,
         "register.html"
     )
-
 
 def LoginView(request):
 

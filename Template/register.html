@@ -1,186 +1,126 @@
-{% extends 'base.html' %}
-
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <section class="register-section">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="register-card">
+          <h2 class="register-title text-center">Create Your Account</h2>
 
-    <div class="container">
+          <p class="register-subtitle text-center">
+            Join KalaKart as a Customer or Seller.
+          </p>
 
-        <div class="row justify-content-center align-items-center">
+          <form method="POST">
+            {% csrf_token %}
 
-            <div class="col-lg-6 col-md-8">
+          <div class="mb-3">
 
-                <div class="register-card">
+    <label for="full_name" class="form-label">
+        Full Name
+    </label>
 
-                    <h2 class="register-title text-center">
-                        Create Your Account
-                    </h2>
+    <input
+        type="text"
+        id="full_name"
+        name="full_name"
+        class="form-control"
+        placeholder="Enter your full name"
+        required
+    >
 
-                    <p class="register-subtitle text-center">
-                        Join KalaKart as a Customer or Seller.
-                    </p>
+</div>
 
-                    <form method="POST">
+            <div class="mb-3">
+              <label class="form-label"> Email Address </label>
 
-                        {% csrf_token %}
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="first_name"
-                                class="form-control"
-                                placeholder="Enter your full name"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Email Address
-                            </label>
-
-                            <input
-                                type="email"
-                                name="email"
-                                class="form-control"
-                                placeholder="Enter your email"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Username
-                            </label>
-
-                            <input
-                                type="text"
-                                name="username"
-                                class="form-control"
-                                placeholder="Choose a username"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Password
-                            </label>
-
-                            <div class="password-box">
-
-                                <input
-                                    type="password"
-                                    name="password1"
-                                    id="registerPassword"
-                                    class="form-control"
-                                    placeholder="Create a password"
-                                    required
-                                >
-
-                                <i
-                                    class="bi bi-eye password-toggle"
-                                    onclick="togglePassword('registerPassword', this)"
-                                ></i>
-
-                            </div>
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Confirm Password
-                            </label>
-
-                            <div class="password-box">
-
-                                <input
-                                    type="password"
-                                    name="password2"
-                                    id="confirmPassword"
-                                    class="form-control"
-                                    placeholder="Confirm your password"
-                                    required
-                                >
-
-                                <i
-                                    class="bi bi-eye password-toggle"
-                                    onclick="togglePassword('confirmPassword', this)"
-                                ></i>
-
-                            </div>
-
-                        </div>
-
-                        <div class="mb-4">
-
-                            <label class="form-label">
-                                Register As
-                            </label>
-
-                            <select
-                                name="user_type"
-                                class="form-select"
-                                required
-                            >
-
-                                <option value="" selected disabled>
-                                    Select Account Type
-                                </option>
-
-                                <option value="customer">
-                                    Customer
-                                </option>
-
-                                <option value="seller">
-                                    Seller
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="register-btn w-100"
-                        >
-                            Create Account
-                        </button>
-
-                    </form>
-
-                    <p class="login-link text-center mt-4">
-
-                        Already have an account?
-
-                        <a href="{% url 'login' %}">
-                            Login
-                        </a>
-
-                    </p>
-
-                </div>
-
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
             </div>
 
+            <div class="mb-3">
+              <label class="form-label"> Username </label>
+
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Password </label>
+
+              <div class="password-box">
+                <input
+                  type="password"
+                  name="password1"
+                  id="registerPassword"
+                  class="form-control"
+                  placeholder="Create a password"
+                  required
+                />
+
+                <i
+                  class="bi bi-eye password-toggle"
+                  onclick="togglePassword('registerPassword', this)"
+                ></i>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Confirm Password </label>
+
+              <div class="password-box">
+                <input
+                  type="password"
+                  name="password2"
+                  id="confirmPassword"
+                  class="form-control"
+                  placeholder="Confirm your password"
+                  required
+                />
+
+                <i
+                  class="bi bi-eye password-toggle"
+                  onclick="togglePassword('confirmPassword', this)"
+                ></i>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label"> Register As </label>
+
+              <select name="user_type" class="form-select" required>
+                <option value="" selected disabled>Select Account Type</option>
+
+                <option value="customer">Customer</option>
+
+                <option value="seller">Seller</option>
+              </select>
+            </div>
+
+            <button type="submit" class="register-btn w-100">
+              Create Account
+            </button>
+          </form>
+
+          <p class="login-link text-center mt-4">
+            Already have an account?
+
+            <a href="{% url 'login' %}"> Login </a>
+          </p>
         </div>
-
+      </div>
     </div>
-
+  </div>
 </section>
 
 {% endblock %}
