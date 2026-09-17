@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 from cart.models import Cart
 from .models import Order
-from django.db import transaction
 
 
 @login_required
@@ -105,74 +105,137 @@ def UpdateOrderStatusView(request, id):
 
         return redirect("home")
 
-
     order = get_object_or_404(
         Order,
         id=id,
         product__seller=request.user
     )
 
+    if request.method != "POST":
+        return redirect("seller-orders")
 
-    if request.method == "POST":
+    new_status = request.POST.get("status")
 
-        new_status = request.POST.get("status")
+    valid_statuses = [
+        "pending",
+        "confirmed",
+        "shipped",
+        "delivered",
+        "cancelled",
+    ]
 
-        valid_statuses = [
-            "pending",
-            "confirmed",
-            "shipped",
-            "delivered",
-            "cancelled",
-        ]
+    if new_status not in valid_statuses:
 
+        messages.error(
+            request,
+            "Invalid order status."
+        )
 
-        if new_status not in valid_statuses:
+        return redirect("seller-orders")
+
+    current_status = order.status
+    product = order.product
+
+    # Pending → Confirmed
+    # Reduce stock when seller confirms the order.
+    if current_status == "pending" and new_status == "confirmed":
+
+        if product.stock < order.quantity:
 
             messages.error(
                 request,
-                "Invalid order status."
+                "Not enough stock available to confirm this order."
             )
 
             return redirect("seller-orders")
 
+        with transaction.atomic():
 
-        # Reduce stock only when order is approved
-        if (
-            order.status == "pending"
-            and new_status == "confirmed"
-        ):
+            product.stock -= order.quantity
+            product.save()
 
-            product = order.product
-
-            if product.stock < order.quantity:
-
-                messages.error(
-                    request,
-                    "Not enough stock available to confirm this order."
-                )
-
-                return redirect("seller-orders")
-
-
-            with transaction.atomic():
-
-                product.stock -= order.quantity
-                product.save()
-
-                order.status = "confirmed"
-                order.save()
-
-
-        else:
-
-            order.status = new_status
+            order.status = "confirmed"
             order.save()
-
 
         messages.success(
             request,
-            "Order status updated successfully."
+            "Order confirmed successfully."
         )
 
+        return redirect("seller-orders")
+
+    # Pending → Cancelled
+    if current_status == "pending" and new_status == "cancelled":
+
+        order.status = "cancelled"
+        order.save()
+
+        messages.success(
+            request,
+            "Order cancelled successfully."
+        )
+
+        return redirect("seller-orders")
+
+    # Confirmed → Shipped
+    if current_status == "confirmed" and new_status == "shipped":
+
+        order.status = "shipped"
+        order.save()
+
+        messages.success(
+            request,
+            "Order marked as shipped."
+        )
+
+        return redirect("seller-orders")
+
+    # Confirmed → Cancelled
+    # Return the previously deducted stock.
+    if current_status == "confirmed" and new_status == "cancelled":
+
+        with transaction.atomic():
+
+            product.stock += order.quantity
+            product.save()
+
+            order.status = "cancelled"
+            order.save()
+
+        messages.success(
+            request,
+            "Order cancelled and stock restored."
+        )
+
+        return redirect("seller-orders")
+
+    # Shipped → Delivered
+    if current_status == "shipped" and new_status == "delivered":
+
+        order.status = "delivered"
+        order.save()
+
+        messages.success(
+            request,
+            "Order marked as delivered."
+        )
+
+        return redirect("seller-orders")
+
+    # Delivered or already cancelled
+    if current_status in ["delivered", "cancelled"]:
+
+        messages.error(
+            request,
+            "This order can no longer be updated."
+        )
+
+        return redirect("seller-orders")
+
+    # Any other invalid transition
+    messages.error(
+        request,
+        "This order status cannot be changed that way."
+    )
 
     return redirect("seller-orders")
