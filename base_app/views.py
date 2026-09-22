@@ -333,3 +333,32 @@ def ProfileView(request):
         request,
         "profile.html"
     )
+
+    @login_required
+def BecomeSellerView(request):
+
+    if request.user.user_type == "seller":
+
+        messages.info(
+            request,
+            "You are already registered as a seller."
+        )
+
+        return redirect("profile")
+
+    if request.method == "POST":
+
+        request.user.user_type = "seller"
+        request.user.save()
+
+        messages.success(
+            request,
+            "Congratulations! Your account is now a seller."
+        )
+
+        return redirect("seller-dashboard")
+
+    return render(
+        request,
+        "become_seller.html"
+    )
