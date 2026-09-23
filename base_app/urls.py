@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', LoginView, name='login'),
     path("logout/", LogoutView, name="logout"),
     path("profile/", ProfileView, name="profile"),
+    path("become-seller/",BecomeSellerView,name="become-seller"),
 ]
