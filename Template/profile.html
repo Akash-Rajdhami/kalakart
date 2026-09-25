@@ -8,242 +8,292 @@
 
   <div class="container">
 
+    <div class="row justify-content-center">
 
-<div class="row justify-content-center">
+      <div class="col-lg-8">
 
-  <div class="col-lg-8">
+        <div class="profile-card shadow-sm">
 
-    <div class="profile-card shadow-sm">
+          <!-- Profile Header -->
 
-      <!-- Profile Header -->
+          <div class="profile-header text-center">
 
-      <div class="profile-header text-center">
+            {% if user.profile_image %}
 
-        {% if user.profile_image %}
+              <img
+                src="{{ user.profile_image.url }}"
+                alt="Profile Image"
+                class="profile-image"
+              />
 
-          <img
-            src="{{ user.profile_image.url }}"
-            alt="Profile Image"
-            class="profile-image"
-          />
+            {% else %}
 
-        {% else %}
+              <div class="profile-placeholder">
+                <i class="bi bi-person"></i>
+              </div>
 
-          <div class="profile-placeholder">
-            <i class="bi bi-person"></i>
+            {% endif %}
+
+            <h2 class="profile-name">
+
+              {% if user.first_name or user.last_name %}
+
+                {{ user.first_name }} {{ user.last_name }}
+
+              {% else %}
+
+                {{ user.username }}
+
+              {% endif %}
+
+            </h2>
+
+            <p class="profile-username">
+              @{{ user.username }}
+            </p>
+
+            {% if user.user_type == "seller" %}
+
+              <span class="badge bg-warning text-dark">
+                Seller
+              </span>
+
+            {% else %}
+
+              <span class="badge bg-secondary">
+                Customer
+              </span>
+
+            {% endif %}
+
           </div>
 
-        {% endif %}
 
-        <h2 class="profile-name">
-          {% if user.first_name or user.last_name %}
-            {{ user.first_name }} {{ user.last_name }}
-          {% else %}
-            {{ user.username }}
+          <!-- Edit Profile Form -->
+
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="profile-form"
+          >
+
+            {% csrf_token %}
+
+
+            <!-- First Name -->
+
+            <div class="profile-form-group">
+
+              <label for="first_name">
+                First Name
+              </label>
+
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                class="form-control"
+                value="{{ user.first_name }}"
+                placeholder="Enter your first name"
+              />
+
+            </div>
+
+
+            <!-- Last Name -->
+
+            <div class="profile-form-group">
+
+              <label for="last_name">
+                Last Name
+              </label>
+
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                class="form-control"
+                value="{{ user.last_name }}"
+                placeholder="Enter your last name"
+              />
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="profile-form-group">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                value="{{ user.email }}"
+                placeholder="Enter your email"
+              />
+
+            </div>
+
+
+            <!-- Phone Number -->
+
+            <div class="profile-form-group">
+
+              <label for="phone_number">
+                Phone Number
+              </label>
+
+              <input
+                type="text"
+                id="phone_number"
+                name="phone_number"
+                class="form-control"
+                value="{{ user.phone_number|default:'' }}"
+                placeholder="Enter your phone number"
+              />
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="profile-form-group">
+
+              <label for="address">
+                Address
+              </label>
+
+              <textarea
+                id="address"
+                name="address"
+                class="form-control"
+                rows="3"
+                placeholder="Enter your address"
+              >{{ user.address|default:'' }}</textarea>
+
+            </div>
+
+
+            <!-- Profile Image -->
+
+            <div class="profile-form-group">
+
+              <label for="profile_image">
+                Profile Picture
+              </label>
+
+              <input
+                type="file"
+                id="profile_image"
+                name="profile_image"
+                class="form-control"
+                accept="image/*"
+              />
+
+            </div>
+
+
+            <!-- Save Button -->
+
+            <div class="profile-actions">
+
+              <button
+                type="submit"
+                class="btn btn-profile"
+              >
+                <i class="bi bi-check-circle me-2"></i>
+                Save Changes
+              </button>
+
+            </div>
+
+          </form>
+
+
+          <!-- Profile Links -->
+
+          <div class="profile-bottom-actions">
+
+            {% if user.user_type == "customer" %}
+
+              <!-- My Orders -->
+
+              <a
+                href="{% url 'my-orders' %}"
+                class="profile-link"
+              >
+                <i class="bi bi-bag me-2"></i>
+                My Orders
+              </a>
+
+            {% else %}
+
+              <!-- Seller Products -->
+
+              <a
+                href="{% url 'seller-dashboard' %}"
+                class="profile-link"
+              >
+                <i class="bi bi-box-seam me-2"></i>
+                My Products
+              </a>
+
+            {% endif %}
+
+          </div>
+
+
+          <!-- Become a Seller -->
+
+          {% if user.user_type == "customer" %}
+
+            <div class="card shadow-sm border-0 mt-4 mb-4">
+
+              <div class="card-body text-center p-4">
+
+                <div class="mb-3">
+
+                  <i
+                    class="bi bi-shop"
+                    style="font-size: 45px; color: #b8860b;"
+                  ></i>
+
+                </div>
+
+                <h5 class="mb-2">
+                  Want to sell your products?
+                </h5>
+
+                <p class="text-muted mb-3">
+                  Share your handmade and cultural products
+                  with customers through KalaKart.
+                </p>
+
+                <a
+                  href="{% url 'become-seller' %}"
+                  class="btn btn-warning"
+                >
+                  <i class="bi bi-shop me-2"></i>
+                  Become a Seller
+                </a>
+
+              </div>
+
+            </div>
+
           {% endif %}
-        </h2>
 
-        <p class="profile-username">
-          @{{ user.username }}
-        </p>
-
-        {% if user.user_type == "seller" %}
-
-          <span class="badge bg-warning text-dark">
-            Seller
-          </span>
-
-        {% else %}
-
-          <span class="badge bg-secondary">
-            Customer
-          </span>
-
-        {% endif %}
-
-      </div>
-
-
-      <!-- Edit Profile Form -->
-
-      <form
-        method="POST"
-        enctype="multipart/form-data"
-        class="profile-form"
-      >
-
-        {% csrf_token %}
-
-
-        <!-- First Name -->
-
-        <div class="profile-form-group">
-
-          <label for="first_name">
-            First Name
-          </label>
-
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            class="form-control"
-            value="{{ user.first_name }}"
-            placeholder="Enter your first name"
-          />
 
         </div>
-
-
-        <!-- Last Name -->
-
-        <div class="profile-form-group">
-
-          <label for="last_name">
-            Last Name
-          </label>
-
-          <input
-            type="text"
-            id="last_name"
-            name="last_name"
-            class="form-control"
-            value="{{ user.last_name }}"
-            placeholder="Enter your last name"
-          />
-
-        </div>
-
-
-        <!-- Email -->
-
-        <div class="profile-form-group">
-
-          <label for="email">
-            Email
-          </label>
-
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            value="{{ user.email }}"
-            placeholder="Enter your email"
-          />
-
-        </div>
-
-
-        <!-- Phone Number -->
-
-        <div class="profile-form-group">
-
-          <label for="phone_number">
-            Phone Number
-          </label>
-
-          <input
-            type="text"
-            id="phone_number"
-            name="phone_number"
-            class="form-control"
-            value="{{ user.phone_number|default:'' }}"
-            placeholder="Enter your phone number"
-          />
-
-        </div>
-
-
-        <!-- Address -->
-
-        <div class="profile-form-group">
-
-          <label for="address">
-            Address
-          </label>
-
-          <textarea
-            id="address"
-            name="address"
-            class="form-control"
-            rows="3"
-            placeholder="Enter your address"
-          >{{ user.address|default:'' }}</textarea>
-
-        </div>
-
-
-        <!-- Profile Image -->
-
-        <div class="profile-form-group">
-
-          <label for="profile_image">
-            Profile Picture
-          </label>
-
-          <input
-            type="file"
-            id="profile_image"
-            name="profile_image"
-            class="form-control"
-            accept="image/*"
-          />
-
-        </div>
-
-
-        <!-- Save Button -->
-
-        <div class="profile-actions">
-
-          <button
-            type="submit"
-            class="btn btn-profile"
-          >
-            <i class="bi bi-check-circle me-2"></i>
-            Save Changes
-          </button>
-
-        </div>
-
-      </form>
-
-
-      <!-- Profile Links -->
-
-      <div class="profile-bottom-actions">
-
-        {% if user.user_type == "customer" %}
-
-          <a
-            href="{% url 'my-orders' %}"
-            class="profile-link"
-          >
-            <i class="bi bi-bag me-2"></i>
-            My Orders
-          </a>
-
-        {% else %}
-
-          <a
-            href="{% url 'seller-dashboard' %}"
-            class="profile-link"
-          >
-            <i class="bi bi-box-seam me-2"></i>
-            My Products
-          </a>
-
-        {% endif %}
 
       </div>
 
     </div>
-
-  </div>
-
-</div>
-
 
   </div>
 
