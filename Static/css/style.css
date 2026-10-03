@@ -535,6 +535,7 @@ body {
     flex-direction: column;
 }
 
+
 .shop-card:hover{
 
     transform: translateY(-5px);
