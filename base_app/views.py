@@ -334,7 +334,7 @@ def ProfileView(request):
         "profile.html"
     )
 
-    @login_required
+@login_required
 def BecomeSellerView(request):
 
     if request.user.user_type == "seller":
