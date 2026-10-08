@@ -329,10 +329,7 @@ def ProfileView(request):
         return redirect("profile")
 
 
-    return render(
-        request,
-        "profile.html"
-    )
+    return render(request,"profile.html")
 
 @login_required
 def BecomeSellerView(request):
