@@ -443,7 +443,10 @@
 </section>
 
 
-<!-- SELLER CTA  -->
+
+<!-- SELLER CTA -->
+
+{% if not user.is_authenticated or user.user_type == "customer" %}
 
 <section class="seller-section">
 
@@ -461,15 +464,13 @@
             </p>
 
             {% if user.is_authenticated %}
-            {% if user.user_type == "customer" %}
-            <a href="{% url 'profile' %}" class="seller-btn">
-                Become a Seller
-            </a>
-            {% endif %}
+                <a href="{% url 'profile' %}" class="seller-btn">
+                    Become a Seller
+                </a>
             {% else %}
-            <a href="{% url 'login' %}" class="seller-btn">
-                Become a Seller
-            </a>
+                <a href="{% url 'login' %}" class="seller-btn">
+                    Become a Seller
+                </a>
             {% endif %}
 
         </div>
@@ -477,6 +478,8 @@
     </div>
 
 </section>
+
+{% endif %}
 
 
 <!--  FOOTER  -->
