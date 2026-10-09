@@ -30,17 +30,11 @@
 
                 <div class="hero-buttons">
 
-                    <a
-                        href="{% url 'shop' %}"
-                        class="btn-shop"
-                    >
+                    <a href="{% url 'shop' %}" class="btn-shop">
                         Shop Now
                     </a>
 
-                    <a
-                        href="{% url 'about' %}"
-                        class="btn-learn"
-                    >
+                    <a href="{% url 'about' %}" class="btn-learn">
                         Learn More
                     </a>
 
@@ -51,11 +45,7 @@
 
             <div class="col-lg-6 text-center">
 
-                <img
-                    src="{% static 'images/hero.png' %}"
-                    alt="KalaKart Products"
-                    class="img-fluid hero-image"
-                >
+                <img src="{% static 'images/hero.png' %}" alt="KalaKart Products" class="img-fluid hero-image">
 
             </div>
 
@@ -66,7 +56,7 @@
 </section>
 
 
-<!-- ==================== FEATURED CATEGORIES ==================== -->
+<!--  FEATURED CATEGORIES  -->
 
 <section class="categories-section">
 
@@ -90,11 +80,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/handicraft.jpg' %}"
-                        class="category-image"
-                        alt="Handicrafts"
-                    >
+                    <img src="{% static 'images/handicraft.jpg' %}" class="category-image" alt="Handicrafts">
 
                     <h4>
                         Handicrafts
@@ -104,10 +90,7 @@
                         Beautiful handmade items crafted with skill and tradition.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=handicrafts"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=handicrafts" class="btn-category">
                         View Products
                     </a>
 
@@ -122,11 +105,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/painting.jpg' %}"
-                        class="category-image"
-                        alt="Paintings"
-                    >
+                    <img src="{% static 'images/painting.jpg' %}" class="category-image" alt="Paintings">
 
                     <h4>
                         Paintings
@@ -136,10 +115,7 @@
                         Unique artworks that add creativity and culture to your space.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=paintings"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=paintings" class="btn-category">
                         View Products
                     </a>
 
@@ -154,11 +130,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/pottery.jpg' %}"
-                        class="category-image"
-                        alt="Pottery"
-                    >
+                    <img src="{% static 'images/pottery.jpg' %}" class="category-image" alt="Pottery">
 
                     <h4>
                         Pottery
@@ -168,10 +140,7 @@
                         Traditional and modern clay creations made by talented artists.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=pottery"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=pottery" class="btn-category">
                         View Products
                     </a>
 
@@ -186,11 +155,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/traditional-wear.jpg' %}"
-                        class="category-image"
-                        alt="Traditional Wear"
-                    >
+                    <img src="{% static 'images/traditional-wear.jpg' %}" class="category-image" alt="Traditional Wear">
 
                     <h4>
                         Traditional Wear
@@ -200,10 +165,7 @@
                         Authentic clothing inspired by local culture and heritage.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=traditional_wears"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=traditional_wears" class="btn-category">
                         View Products
                     </a>
 
@@ -218,11 +180,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/home-decor.jpg' %}"
-                        class="category-image"
-                        alt="Home Decor"
-                    >
+                    <img src="{% static 'images/home-decor.jpg' %}" class="category-image" alt="Home Decor">
 
                     <h4>
                         Home Decor
@@ -232,10 +190,7 @@
                         Handmade decorative pieces for a warm and beautiful home.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=home_decor"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=home_decor" class="btn-category">
                         View Products
                     </a>
 
@@ -250,11 +205,7 @@
 
                 <div class="category-card">
 
-                    <img
-                        src="{% static 'images/jewelry.jpg' %}"
-                        class="category-image"
-                        alt="Jewelry"
-                    >
+                    <img src="{% static 'images/jewelry.jpg' %}" class="category-image" alt="Jewelry">
 
                     <h4>
                         Jewelry
@@ -264,10 +215,7 @@
                         Elegant handmade accessories designed for every occasion.
                     </p>
 
-                    <a
-                        href="{% url 'shop' %}?category=jewellery"
-                        class="btn-category"
-                    >
+                    <a href="{% url 'shop' %}?category=jewellery" class="btn-category">
                         View Products
                     </a>
 
@@ -430,70 +378,61 @@
 
             {% for product in featured_products %}
 
-                <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
 
-                    <div class="product-card">
-
-
-                        <!-- Product Image -->
-
-                        {% if product.image %}
-
-                            <img
-                                src="{{ product.image.url }}"
-                                alt="{{ product.name }}"
-                                class="product-image"
-                            >
-
-                        {% else %}
-
-                            <div
-                                class="product-image d-flex align-items-center justify-content-center bg-light"
-                            >
-
-                                <span class="text-muted">
-                                    No image available
-                                </span>
-
-                            </div>
-
-                        {% endif %}
+                <div class="product-card">
 
 
-                        <!-- Product Information -->
+                    <!-- Product Image -->
 
-                        <div class="product-content">
+                    {% if product.image %}
 
-                            <h4>
-                                {{ product.name }}
-                            </h4>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
 
-                            <p class="product-price">
-                                Rs. {{ product.price }}
-                            </p>
+                    {% else %}
 
-                            <a
-                                href="{% url 'product-detail' product.id %}"
-                                class="btn-product"
-                            >
-                                View Product
-                            </a>
+                    <div class="product-image d-flex align-items-center justify-content-center bg-light">
 
-                        </div>
+                        <span class="text-muted">
+                            No image available
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- Product Information -->
+
+                    <div class="product-content">
+
+                        <h4>
+                            {{ product.name }}
+                        </h4>
+
+                        <p class="product-price">
+                            Rs. {{ product.price }}
+                        </p>
+
+                        <a href="{% url 'product-detail' product.id %}" class="btn-product">
+                            View Product
+                        </a>
 
                     </div>
 
                 </div>
 
+            </div>
+
             {% empty %}
 
-                <div class="col-12 text-center">
+            <div class="col-12 text-center">
 
-                    <p class="text-muted">
-                        No featured products available yet.
-                    </p>
+                <p class="text-muted">
+                    No featured products available yet.
+                </p>
 
-                </div>
+            </div>
 
             {% endfor %}
 
@@ -521,12 +460,17 @@
                 and grow your artistic business with KalaKart.
             </p>
 
-            <a
-                href="{% url 'register' %}"
-                class="seller-btn"
-            >
+            {% if user.is_authenticated %}
+            {% if user.user_type == "customer" %}
+            <a href="{% url 'profile' %}" class="seller-btn">
                 Become a Seller
             </a>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}" class="seller-btn">
+                Become a Seller
+            </a>
+            {% endif %}
 
         </div>
 
