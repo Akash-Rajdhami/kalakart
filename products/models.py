@@ -9,7 +9,7 @@ class Product(models.Model):
         ('Handicraft', 'Handicraft'),
         ('Jewelry', 'Jewelry'),
         ('Pottery', 'Pottery'),
-        ('Wooden Art', 'Wooden Art'),
+        ('Home Decor', 'Home Decor'),
         ('Traditional Wear', 'Traditional Wear'),
     )
 
