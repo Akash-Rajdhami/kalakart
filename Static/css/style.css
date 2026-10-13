@@ -118,9 +118,10 @@ body {
 }
 
 .hero-btn:hover {
-  background-color: var(--secondary-color);
-  color: #fff;
+  background-color: #fb923c;
+  color: #ffffff;
   transform: translateY(-2px);
+  text-decoration: none;
 }
 
 .btn-shop,
