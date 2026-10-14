@@ -6,11 +6,9 @@ from django.contrib.auth.decorators import login_required
 from products.models import Product
 
 
-def HomeView(request):
 
-    featured_products = Product.objects.order_by(
-        "-created_at"
-    )[:4]
+def HomeView(request):
+    featured_products = Product.objects.order_by("?")[:4]
 
     context = {
         "featured_products": featured_products,
@@ -21,6 +19,7 @@ def HomeView(request):
         "home.html",
         context
     )
+
 
 
 def ShopView(request):
