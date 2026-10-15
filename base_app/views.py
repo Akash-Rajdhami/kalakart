@@ -6,21 +6,16 @@ from django.contrib.auth.decorators import login_required
 from products.models import Product
 
 
-
 def HomeView(request):
-    featured_products = Product.objects.order_by("?")[:4]
+    featured_products = Product.objects.filter(
+        stock__gt=0
+    ).order_by("?")[:4]
 
     context = {
-        "featured_products": featured_products,
+        "featured_products": featured_products
     }
 
-    return render(
-        request,
-        "home.html",
-        context
-    )
-
-
+    return render(request, "home.html", context)
 
 def ShopView(request):
 
