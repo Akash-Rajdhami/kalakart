@@ -1371,3 +1371,11 @@ body {
     }
 
 }
+
+/* Seller Dashboard and Orders hover effect */
+.seller-nav .nav-link:hover {
+    background-color: var(--main-color);
+    color: white !important;
+    border-radius: 6px;
+    transition: 0.3s;
+}
