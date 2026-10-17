@@ -1373,9 +1373,14 @@ body {
 }
 
 /* Seller Dashboard and Orders hover effect */
-.seller-nav .nav-link:hover {
-    background-color: var(--main-color);
-    color: white !important;
-    border-radius: 6px;
-    transition: 0.3s;
+a.btn-login[href*="seller-dashboard"],
+a.btn-login[href*="seller-orders"] {
+    transition: all 0.3s ease;
+}
+
+a.btn-login[href*="seller-dashboard"]:hover,
+a.btn-login[href*="seller-orders"]:hover {
+    background-color: var(--main-color) !important;
+    color: #ffffff !important;
+    border-color: var(--main-color) !important;
 }
